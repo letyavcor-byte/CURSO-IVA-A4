@@ -1,0 +1,5407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Curso recurrente IVA-A-04</title>
+
+  <style>
+    :root {
+      --azul: #173e61;
+      --turquesa: #087f8c;
+      --fondo: #edf3f8;
+      --texto: #243746;
+      --borde: #cfdae4;
+      --blanco: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 36px 24px;
+      background: var(--azul);
+      color: var(--blanco);
+      border-bottom: 7px solid var(--turquesa);
+    }
+
+    .contenedor {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    header h1 {
+      margin: 6px 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.25;
+    }
+
+    header p {
+      max-width: 850px;
+      margin: 8px 0;
+    }
+
+    .etiqueta {
+      margin: 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    main {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .panel {
+      margin-bottom: 24px;
+      padding: clamp(20px, 4vw, 34px);
+      background: var(--blanco);
+      border-radius: 16px;
+      box-shadow: 0 4px 18px rgb(23 62 97 / 6%);
+    }
+
+    h2,
+    h3,
+    h4 {
+      color: var(--azul);
+      line-height: 1.35;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      margin-top: 28px;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 11px 17px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--azul);
+      color: var(--blanco);
+      font: inherit;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    button:hover:not(:disabled) {
+      background: var(--turquesa);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #d59000;
+      outline-offset: 4px;
+    }
+
+    .acciones,
+    .navegacion {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .navegacion button[aria-current="step"] {
+      background: var(--turquesa);
+    }
+
+    .estado {
+      color: #526574;
+      font-size: 0.95rem;
+    }
+
+    .tarjetas {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 220px), 1fr)
+      );
+      gap: 16px;
+      margin: 22px 0;
+    }
+
+    .tarjeta {
+      padding: 18px;
+      border: 1px solid var(--borde);
+      border-top: 4px solid var(--turquesa);
+      border-radius: 10px;
+      background: #f8fbfd;
+    }
+
+    .tarjeta h3 {
+      margin: 0 0 8px;
+    }
+
+    .leccion-ampliada {
+      margin: 24px 0;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .diagrama {
+      margin: 22px 0;
+      padding: 20px;
+      overflow-x: auto;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      background: #f5fafc;
+    }
+
+    .flujo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .flujo li {
+      flex: 1 1 150px;
+      padding: 16px;
+      border-radius: 9px;
+      background: #e5f0f6;
+      color: var(--azul);
+    }
+
+    .caso {
+      margin: 24px 0;
+      padding: 22px;
+      border-left: 5px solid var(--turquesa);
+      border-radius: 10px;
+      background: #edf8f8;
+    }
+
+    .aviso {
+      margin: 20px 0;
+      padding: 18px;
+      border-left: 5px solid #d59000;
+      border-radius: 9px;
+      background: #fff7df;
+    }
+
+    .tabla-contenedor {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 13px;
+      border: 1px solid var(--borde);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8f0f6;
+      color: var(--azul);
+    }
+
+    fieldset {
+      min-width: 0;
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+    }
+
+    legend {
+      max-width: 100%;
+      padding: 0 8px;
+      font-weight: 700;
+      color: var(--azul);
+    }
+
+    .opcion {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f4f7fa;
+      cursor: pointer;
+    }
+
+    .opcion input {
+      flex-shrink: 0;
+      margin-top: 7px;
+      accent-color: var(--turquesa);
+    }
+
+    .acceso-campo {
+      display: block;
+      width: 100%;
+      max-width: 520px;
+      margin: 8px 0 16px;
+      padding: 12px;
+      border: 1px solid #b9cbd9;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    .entrega-confirmada {
+      margin: 20px 0;
+      padding: 18px;
+      border-left: 5px solid #238052;
+      border-radius: 10px;
+      background: #e5f5ed;
+    }
+
+    .error {
+      color: #a32121;
+    }
+
+    progress {
+      display: block;
+      width: 100%;
+      height: 18px;
+      margin: 8px 0 18px;
+      accent-color: var(--turquesa);
+    }
+
+    details {
+      margin: 20px 0;
+      padding: 16px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+    }
+
+    summary {
+      color: var(--azul);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 24px;
+      color: #526574;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 14px;
+      }
+
+      header {
+        padding: 26px 20px;
+      }
+
+      .acciones button {
+        flex: 1 1 180px;
+      }
+
+      fieldset {
+        padding: 14px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      header {
+        background: white;
+        color: black;
+      }
+
+      .panel {
+        box-shadow: none;
+      }
+
+      .navegacion,
+      .acciones,
+      #panelAcceso,
+      #panelResultados,
+      #actividad {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="contenedor">
+      <p class="etiqueta">Curso recurrente · IVA-A-04</p>
+
+      <h1>Inspector Verificador Aeronáutico</h1>
+
+      <p>
+        Inspección: marco normativo, certificación de
+        aeronavegabilidad e inspección en rampa.
+      </p>
+
+      <p>
+        Comprender los requisitos, revisar la documentación
+        y relacionar las condiciones observadas con
+        evidencias verificables.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <noscript>
+      <section class="panel">
+        <h2>JavaScript está desactivado</h2>
+        <p>
+          Activa JavaScript para navegar por los módulos
+          y utilizar las actividades del curso.
+        </p>
+      </section>
+    </noscript>
+
+    <section class="panel progreso">
+      <h2>Tu recorrido</h2>
+
+      <p>
+        Comienza con M00. Después estudia los módulos
+        M01, M02 y M03 y realiza sus actividades.
+      </p>
+
+      <p id="lecturasEstado">Lecturas marcadas: 0 de 4</p>
+
+      <progress
+        id="barraLecturas"
+        value="0"
+        max="4"
+        aria-labelledby="lecturasEstado"
+      ></progress>
+
+      <p id="entregasEstado">
+        Actividades registradas: acceso pendiente
+      </p>
+
+      <progress
+        id="barraEntregas"
+        value="0"
+        max="3"
+        aria-labelledby="entregasEstado"
+      ></progress>
+
+      <p class="estado">
+        Marcar una lectura no equivale a registrar asistencia.
+        Las entregas de evaluación requieren verificar
+        un correo autorizado.
+      </p>
+
+      <nav
+        id="navegacionModulos"
+        class="navegacion"
+        aria-label="Módulos del curso"
+      ></nav>
+    </section>
+
+    <section
+      id="panelAcceso"
+      class="panel"
+      aria-labelledby="tituloAcceso"
+    >
+      <h2 id="tituloAcceso">Acceso a las actividades</h2>
+
+      <p>
+        Puedes estudiar el contenido sin iniciar sesión.
+        Para entregar actividades y consultar tus
+        resultados, verifica tu correo autorizado.
+      </p>
+
+      <div id="contenidoAcceso"></div>
+
+      <p
+        id="mensajeAcceso"
+        role="status"
+        aria-live="polite"
+      ></p>
+    </section>
+
+    <section
+      id="contenidoModulo"
+      class="panel"
+      aria-label="Contenido del módulo"
+    ></section>
+
+    <section
+      id="panelResultados"
+      class="panel"
+      aria-labelledby="tituloResultados"
+    >
+      <h2 id="tituloResultados">
+        Resultado conjunto de las actividades
+      </h2>
+
+      <p>
+        M00 no se califica. Cada módulo de M01 a M03
+        permite una sola entrega definitiva. La calificación
+        final se consulta cuando las tres actividades
+        quedan registradas.
+      </p>
+
+      <button
+        id="consultarResultados"
+        type="button"
+        disabled
+      >
+        Consultar resultado
+      </button>
+
+      <div
+        id="resultado"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </section>
+  </main>
+
+  <footer>
+    Curso recurrente IVA-A-04 · Inspección
+  </footer>
+
+  <!-- CONTINUAR AQUÍ CON EL SIGUIENTE BLOQUE -->
+    <script>
+    "use strict";
+
+    /*
+     * CONFIGURACIÓN DEL CURSO IVA-A-04
+     * El servicio de Apps Script se configurará después.
+     * No utilizar la dirección del servicio de IVA-A-01.
+     */
+    const CONFIG_CURSO = Object.freeze({
+      codigo: "IVA-A-04",
+      version: "IVA-A-04-v1",
+      servicio: "",
+      claveSesion: "iva-a-04-sesion-v1",
+      claveLecturas: "iva-a-04-lecturas-v1",
+      tipoRespuesta: "IVA_A4_EVALUACION",
+      modulosEvaluables: ["M01", "M02", "M03"],
+      totalPreguntas: 24
+    });
+
+    function crearLeccion(titulo, contenido) {
+      return {
+        titulo,
+        contenido
+      };
+    }
+
+    /*
+     * Las respuestas correctas no se incluyen en esta página.
+     * Se configurarán por separado en Apps Script.
+     */
+    function crearPregunta(texto, opciones) {
+      return {
+        texto,
+        opciones: [...opciones]
+      };
+    }
+
+    const modulos = [
+      {
+        codigo: "M00",
+
+        titulo: "Bienvenida y organización del curso",
+
+        objetivo:
+          "Conocer el propósito del curso, sus materiales " +
+          "y la forma de estudiar y participar en las actividades.",
+
+        tarjetas: [
+          {
+            titulo: "Identidad profesional",
+
+            texto:
+              "Relaciona los temas con tu formación, experiencia " +
+              "y responsabilidades de inspección."
+          },
+          {
+            titulo: "Participación",
+
+            texto:
+              "Estudia con atención, analiza los casos y distingue " +
+              "los hechos verificables de las suposiciones."
+          },
+          {
+            titulo: "Materiales",
+
+            texto:
+              "Utiliza las explicaciones del curso junto con " +
+              "las presentaciones y referencias correspondientes."
+          },
+          {
+            titulo: "Evaluación",
+
+            texto:
+              "M01, M02 y M03 incluyen ocho preguntas cada uno. " +
+              "M00 es introductorio y no aporta puntos."
+          }
+        ],
+
+        lecciones: [
+          crearLeccion(
+            "1. Bienvenida al curso",
+            `
+              <p>
+                Bienvenido al curso recurrente IVA-A-04.
+                Este recorrido organiza contenidos relacionados
+                con las tareas del Inspector Verificador
+                Aeronáutico en la subespecialidad de inspección.
+                Su propósito es ayudarte a comprender la relación
+                entre los requisitos aplicables, la documentación
+                que se revisa y las condiciones que deben
+                comprobarse durante una inspección.
+              </p>
+
+              <p>
+                El estudio comienza con el marco normativo
+                y los procedimientos relacionados con la
+                actividad del inspector. Después aborda la
+                expedición del certificado de aeronavegabilidad
+                y concluye con la inspección en rampa.
+                Los temas se presentan como partes de un
+                mismo trabajo: identificar qué corresponde
+                revisar, examinar los antecedentes y sustentar
+                las observaciones con evidencia.
+              </p>
+            `
+          ),
+
+          crearLeccion(
+            "2. Cómo estudiar en esta página",
+            `
+              <p>
+                Recorre los módulos en orden. Antes de responder
+                una actividad, lee el objetivo, estudia las
+                explicaciones y utiliza los esquemas para
+                relacionar los conceptos. Las tarjetas iniciales
+                te orientan sobre los temas principales, pero
+                no sustituyen el desarrollo de cada lección.
+              </p>
+
+              <p>
+                Cuando aparezca un caso didáctico, distingue
+                qué información está disponible, qué documento
+                o registro permitiría comprobarla y qué aspecto
+                requiere aclaración. No completes un expediente
+                con datos que el caso no proporciona.
+              </p>
+
+              <div
+                class="diagrama"
+                role="group"
+                aria-label="Secuencia de estudio"
+              >
+                <h3>Tu secuencia de estudio</h3>
+
+                <ol class="flujo">
+                  <li>Lee el objetivo del módulo.</li>
+                  <li>Estudia las explicaciones.</li>
+                  <li>Relaciona documentos y evidencias.</li>
+                  <li>Analiza el caso didáctico.</li>
+                  <li>Responde y revisa antes de entregar.</li>
+                </ol>
+              </div>
+
+              <p>
+                Puedes volver al contenido para repasar.
+                La navegación entre módulos no equivale
+                a realizar una entrega de evaluación.
+              </p>
+            `
+          ),
+
+          crearLeccion(
+            "3. Acceso y actividades de evaluación",
+            `
+              <p>
+                Puedes leer el contenido sin iniciar sesión.
+                Para entregar las actividades y consultar
+                resultados asociados a tu cuenta, utilizarás
+                un correo autorizado y un código de acceso
+                enviado a esa dirección.
+              </p>
+
+              <p>
+                Cada módulo evaluable contiene ocho preguntas
+                de opción múltiple. Selecciona una respuesta
+                por pregunta y comprueba tus elecciones
+                antes de confirmar la entrega.
+              </p>
+
+              <div class="aviso">
+                <h3>Una sola entrega definitiva</h3>
+
+                <p>
+                  Puedes cambiar tus opciones antes de entregar.
+                  Después de que el servicio confirme el
+                  registro, la actividad quedará bloqueada
+                  y no podrás sustituir tus respuestas.
+                </p>
+              </div>
+
+              <p>
+                Las actividades entregadas se guardarán en
+                el registro del curso y se recuperarán al
+                verificar tu correo. Al completar M01, M02
+                y M03, podrás consultar la calificación final.
+                El servicio también enviará el correo
+                de resultados.
+              </p>
+
+              <p>
+                M00 no contiene preguntas de evaluación
+                y no aporta puntos a la calificación.
+              </p>
+            `
+          )
+        ],
+
+        caso: null,
+
+        fuente:
+          "Módulo introductorio adaptado de la estructura " +
+          "de bienvenida y organización del curso IVA-A-01. " +
+          "Recorrido temático ajustado a las presentaciones " +
+          "M01, M02 y M03 de IVA-A-04.",
+
+        preguntas: []
+      }
+    ];
+
+    // FIN DEL BLOQUE M00. EL SIGUIENTE BLOQUE AGREGA M01.
+          modulos.push({
+      codigo: "M01",
+
+      titulo:
+        "Normatividad aeronáutica y procedimientos " +
+        "relacionados con la inspección",
+
+      objetivo:
+        "Distinguir las funciones de los organismos y las " +
+        "autoridades de aviación, identificar los instrumentos " +
+        "normativos relacionados con la inspección y sustentar " +
+        "las observaciones mediante requisitos y evidencias.",
+
+      tarjetas: [
+        {
+          titulo: "Organismos y autoridades",
+          texto:
+            "Distingue la cooperación internacional, la " +
+            "representación de la industria y las funciones " +
+            "de regulación y vigilancia."
+        },
+        {
+          titulo: "Marco normativo",
+          texto:
+            "Relaciona convenios, anexos, leyes, reglamentos " +
+            "y disposiciones técnicas con el asunto que revisas."
+        },
+        {
+          titulo: "Vigilancia continua",
+          texto:
+            "Comprueba que el cumplimiento se mantiene " +
+            "después de una certificación o aprobación."
+        },
+        {
+          titulo: "Hallazgos sustentados",
+          texto:
+            "Vincula la condición observada con el requisito " +
+            "aplicable y la evidencia que respalda la conclusión."
+        }
+      ],
+
+      lecciones: [
+        crearLeccion(
+          "1. Organismos internacionales y su relación con la aviación",
+          `
+            <p>
+              Una operación aérea puede involucrar aeronaves,
+              tripulaciones, aeropuertos y servicios de varios
+              países. Para que estos participantes puedan
+              coordinarse, se necesita un marco de cooperación
+              internacional y criterios técnicos comunes.
+              Sin embargo, participar en ese marco no significa
+              que todas las organizaciones tengan las mismas
+              atribuciones.
+            </p>
+
+            <p>
+              La Organización de las Naciones Unidas, ONU,
+              promueve la cooperación entre Estados.
+              La Organización de Aviación Civil Internacional,
+              OACI, es el organismo especializado de las
+              Naciones Unidas en materia de aviación civil
+              internacional. Su trabajo permite desarrollar
+              normas y métodos recomendados y coordinar
+              asuntos técnicos entre los Estados.
+            </p>
+
+            <p>
+              La Asociación de Transporte Aéreo Internacional,
+              IATA, tiene una naturaleza distinta: es una
+              asociación de aerolíneas. Su función de
+              representación y cooperación dentro de la
+              industria no debe confundirse con las facultades
+              de una autoridad aeronáutica.
+            </p>
+
+            <p>
+              La aviación también depende de conocimientos
+              y servicios especializados. La Organización
+              Meteorológica Mundial, OMM, se ocupa de la
+              meteorología, el clima y el agua. La Unión
+              Internacional de Telecomunicaciones, UIT,
+              participa en la coordinación del espectro
+              radioeléctrico y en la normalización de
+              las telecomunicaciones.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Funciones que deben distinguirse
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Organismo</th>
+                    <th scope="col">Ámbito</th>
+                    <th scope="col">
+                      Relación con el trabajo de inspección
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>ONU</td>
+                    <td>Cooperación internacional.</td>
+                    <td>
+                      Permite ubicar el marco general
+                      de colaboración entre Estados.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>OACI</td>
+                    <td>Aviación civil internacional.</td>
+                    <td>
+                      Permite identificar normas, métodos
+                      recomendados y procedimientos
+                      internacionales de aviación.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>IATA</td>
+                    <td>Asociación de aerolíneas.</td>
+                    <td>
+                      Permite distinguir la representación
+                      de la industria de las funciones
+                      de una autoridad.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>OMM</td>
+                    <td>Meteorología, clima y agua.</td>
+                    <td>
+                      Ayuda a comprender el ámbito de
+                      la coordinación meteorológica
+                      que apoya a la aviación.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>UIT</td>
+                    <td>Telecomunicaciones.</td>
+                    <td>
+                      Ayuda a comprender la coordinación
+                      del espectro y de las comunicaciones.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Para el inspector, esta distinción tiene una
+              consecuencia práctica: antes de utilizar una
+              referencia debe identificar quién la emite,
+              cuál es su naturaleza y qué alcance tiene.
+              El nombre de una organización no basta para
+              determinar que un documento constituye una
+              autorización o un requisito obligatorio.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "2. Autoridades de aviación: emisor, competencia y alcance",
+          `
+            <p>
+              Las autoridades de aviación ejercen funciones
+              públicas dentro del ámbito que les corresponde.
+              Entre las referencias internacionales se
+              encuentran la Federal Aviation Administration,
+              FAA; la Agencia de la Unión Europea para la
+              Seguridad Aérea, EASA; Transport Canada, TC;
+              y las autoridades nacionales identificadas
+              por denominaciones como ANAC.
+            </p>
+
+            <p>
+              Al revisar un documento emitido por una autoridad
+              extranjera, el inspector debe identificar
+              al emisor y el objeto de su intervención.
+              Es necesario distinguir si el documento
+              corresponde a una certificación, una aprobación,
+              una autorización o información técnica.
+            </p>
+
+            <p>
+              También debe examinar qué producto, persona,
+              organización o actividad está comprendido
+              en el documento. Reconocer las siglas de la
+              autoridad no demuestra, por sí solo, que el
+              documento cubra el asunto que se está revisando.
+            </p>
+
+            <div class="diagrama">
+              <h3>Identificación de un documento</h3>
+
+              <ol class="flujo">
+                <li>Identifica a la autoridad emisora.</li>
+                <li>Determina la naturaleza del documento.</li>
+                <li>Revisa su objeto y su alcance.</li>
+                <li>
+                  Relaciónalo con el requisito
+                  que corresponde comprobar.
+                </li>
+              </ol>
+            </div>
+
+            <p>
+              Por ejemplo, un documento relativo a un componente
+              debe examinarse en relación con ese componente
+              y con la finalidad de la revisión. No debe
+              extenderse su alcance a toda la aeronave
+              o a una operación sin verificar que realmente
+              comprende ese supuesto.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "3. Convenio, anexos, SARPS y PANS",
+          `
+            <p>
+              El Convenio sobre Aviación Civil Internacional
+              establece el marco de cooperación entre los
+              Estados en esta materia. Sus anexos organizan
+              las normas y métodos recomendados por áreas
+              técnicas, como licencias, operaciones,
+              aeronavegabilidad, aeródromos y seguridad
+              operacional.
+            </p>
+
+            <p>
+              Para estudiar una referencia internacional,
+              primero identifica la materia que desarrolla.
+              Esta clasificación permite localizar el tema
+              correspondiente y evita utilizar un documento
+              relacionado con una actividad diferente.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Materias de consulta relacionadas con la inspección
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Anexo</th>
+                    <th scope="col">Materia</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Licencias al personal.</td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>Operación de aeronaves.</td>
+                  </tr>
+
+                  <tr>
+                    <td>7</td>
+                    <td>
+                      Marcas de nacionalidad y matrícula
+                      de las aeronaves.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>Aeronavegabilidad.</td>
+                  </tr>
+
+                  <tr>
+                    <td>10</td>
+                    <td>Telecomunicaciones aeronáuticas.</td>
+                  </tr>
+
+                  <tr>
+                    <td>13</td>
+                    <td>
+                      Investigación de accidentes
+                      e incidentes de aviación.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>18</td>
+                    <td>
+                      Transporte sin riesgos de mercancías
+                      peligrosas por vía aérea.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>19</td>
+                    <td>Gestión de la seguridad operacional.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Los SARPS son las normas y métodos recomendados.
+              Los PANS son procedimientos para los servicios
+              de navegación aérea. Aunque se relacionan,
+              no tienen la misma categoría ni deben tratarse
+              como documentos equivalentes.
+            </p>
+
+            <p>
+              Los SARPS son adoptados por el Consejo de la
+              OACI conforme al procedimiento del Convenio.
+              Los PANS son aprobados por el Consejo y su
+              aplicación mundial se recomienda a los Estados
+              contratantes. Pueden ampliar principios
+              contenidos en los SARPS y facilitar su aplicación.
+            </p>
+
+            <p>
+              Los manuales y otros documentos técnicos
+              complementan la comprensión de estas materias.
+              La revisión debe conservar la diferencia
+              entre una norma, un método recomendado,
+              un procedimiento y un texto de orientación.
+              Identificar esa naturaleza es parte del
+              análisis de la referencia.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "4. USOAP y capacidad estatal de vigilancia",
+          `
+            <p>
+              El Programa Universal de Auditoría de Vigilancia
+              de la Seguridad Operacional, USOAP, evalúa
+              la capacidad del Estado para supervisar
+              la seguridad operacional. El análisis se
+              relaciona con la aplicación eficaz y coherente
+              de los ocho elementos críticos de un sistema
+              de vigilancia.
+            </p>
+
+            <p>
+              Estos elementos pueden comprenderse en dos
+              grupos conectados. El primero establece
+              las bases del sistema: legislación, reglamentos,
+              organización, personal técnico y orientación.
+              El segundo lleva esas bases a la práctica:
+              certificación, vigilancia continua y solución
+              de problemas.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Los ocho elementos críticos
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Elemento</th>
+                    <th scope="col">Finalidad</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Establecer</td>
+                    <td>CE-1. Legislación aeronáutica básica.</td>
+                    <td>
+                      Proporcionar la base jurídica
+                      para ejercer la vigilancia.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Establecer</td>
+                    <td>CE-2. Reglamentos específicos.</td>
+                    <td>
+                      Desarrollar los requisitos
+                      aplicables a las actividades.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Establecer</td>
+                    <td>CE-3. Sistema y funciones estatales.</td>
+                    <td>
+                      Definir responsabilidades,
+                      organización y recursos.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Establecer</td>
+                    <td>CE-4. Personal técnico cualificado.</td>
+                    <td>
+                      Mantener la competencia mediante
+                      cualificación e instrucción.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Establecer</td>
+                    <td>
+                      CE-5. Orientación técnica,
+                      instrumentos e información.
+                    </td>
+                    <td>
+                      Proporcionar procedimientos
+                      y medios para realizar
+                      el trabajo técnico.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Implantar</td>
+                    <td>
+                      CE-6. Licencias, certificaciones,
+                      autorizaciones y aprobaciones.
+                    </td>
+                    <td>
+                      Comprobar requisitos antes
+                      de permitir el ejercicio
+                      de los privilegios.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Implantar</td>
+                    <td>CE-7. Obligaciones de vigilancia.</td>
+                    <td>
+                      Comprobar de forma continua
+                      que se mantiene el cumplimiento.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Implantar</td>
+                    <td>
+                      CE-8. Solución de problemas
+                      de seguridad operacional.
+                    </td>
+                    <td>
+                      Adoptar medidas y dar seguimiento
+                      a la resolución de problemas.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              La relación entre ambos grupos explica por qué
+              la existencia de un procedimiento no basta
+              para demostrar que el sistema funciona.
+              Deben existir personas competentes, medios
+              de trabajo y evidencia de aplicación,
+              supervisión y seguimiento.
+            </p>
+
+            <p>
+              La vigilancia tampoco termina con la emisión
+              de un certificado. Después de comprobar
+              los requisitos iniciales, es necesario verificar
+              que el titular mantiene las condiciones
+              correspondientes y que los problemas
+              detectados se atienden.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "5. Coordinación, documentación y seguimiento",
+          `
+            <p>
+              La vigilancia de la seguridad operacional
+              requiere que las actividades técnicas se
+              apoyen en procesos de gestión. Reglamentar,
+              certificar y supervisar no son tareas aisladas:
+              necesitan documentación controlada,
+              comunicación y personal competente.
+            </p>
+
+            <p>
+              El control de documentos y registros permite
+              identificar los procedimientos y conservar
+              la evidencia del trabajo realizado.
+              La planificación organiza las actividades;
+              la gestión de competencias relaciona las
+              tareas con la preparación del personal;
+              y la auditoría interna permite examinar
+              el funcionamiento de los procesos.
+            </p>
+
+            <p>
+              La identificación de peligros y no conformidades
+              debe conectarse con la implementación de
+              acciones y la gestión de riesgos. Registrar
+              un problema sin darle seguimiento deja
+              incompleto el ciclo de vigilancia.
+            </p>
+
+            <div class="diagrama">
+              <h3>Relación entre revisión y mejora</h3>
+
+              <ol class="flujo">
+                <li>Planificar la actividad.</li>
+                <li>Aplicar el procedimiento.</li>
+                <li>Conservar los registros.</li>
+                <li>Identificar discrepancias.</li>
+                <li>Dar seguimiento a las acciones.</li>
+              </ol>
+            </div>
+
+            <p>
+              Para el inspector, esta relación significa
+              que el expediente debe permitir reconstruir
+              la actuación: qué se revisó, qué se encontró,
+              qué evidencia se obtuvo y cómo se dio
+              seguimiento al asunto.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "6. Marco normativo nacional y aplicación a la revisión",
+          `
+            <p>
+              El marco normativo nacional comprende
+              instrumentos de distinta naturaleza:
+              Constitución, tratados, leyes, reglamentos,
+              Normas Oficiales Mexicanas y disposiciones
+              técnico-administrativas. Cada uno debe
+              identificarse por su denominación, objeto
+              y ámbito de aplicación.
+            </p>
+
+            <p>
+              La Ley de Aviación Civil regula la explotación,
+              el uso o aprovechamiento del espacio aéreo
+              situado sobre el territorio nacional respecto
+              de los servicios comprendidos en su objeto.
+              La Ley de Aeropuertos se refiere a la
+              construcción, administración, operación
+              y explotación de los aeródromos civiles.
+            </p>
+
+            <p>
+              Los reglamentos desarrollan las disposiciones
+              de sus leyes correspondientes. Por ello,
+              al citar el fundamento de una revisión
+              debe conservarse el nombre correcto del
+              instrumento: un reglamento no debe
+              identificarse como si fuera una ley.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Instrumentos y materias de referencia
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Instrumento</th>
+                    <th scope="col">Materia de estudio</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Constitución</td>
+                    <td>
+                      Marco jurídico fundamental
+                      y organización de los poderes.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Tratados internacionales</td>
+                    <td>
+                      Compromisos internacionales
+                      en las materias que regulan.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Ley de Aviación Civil</td>
+                    <td>
+                      Actividades y servicios aeronáuticos
+                      comprendidos en su objeto.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Ley de Aeropuertos</td>
+                    <td>
+                      Construcción, administración,
+                      operación y explotación
+                      de aeródromos civiles.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Reglamentos de las leyes</td>
+                    <td>
+                      Desarrollo de las disposiciones
+                      de la ley correspondiente.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Reglamento del Registro
+                      Aeronáutico Mexicano
+                    </td>
+                    <td>
+                      Organización del registro e
+                      inscripciones, rectificaciones,
+                      cancelaciones y certificaciones.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Reglamento de permisos, licencias
+                      y certificados de capacidad
+                      del personal técnico aeronáutico
+                    </td>
+                    <td>
+                      Requisitos, derechos y obligaciones
+                      de los documentos comprendidos
+                      en su ámbito.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Localizar un documento relacionado con
+              la aviación es solo el inicio. La revisión
+              requiere identificar la disposición concreta
+              que corresponde al sujeto, la actividad
+              y la condición examinada.
+            </p>
+
+            <p>
+              Antes de utilizar una referencia en una
+              actuación, comprueba su versión y vigencia.
+              Una copia antigua o una fecha de reforma
+              aislada no permiten concluir que el texto
+              consultado sea el aplicable.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "7. NOM, circulares y cartas de política",
+          `
+            <p>
+              Las Normas Oficiales Mexicanas, NOM,
+              son regulaciones técnicas de observancia
+              obligatoria dentro de su ámbito de aplicación.
+              Pueden establecer reglas, especificaciones,
+              características o métodos relacionados
+              con los bienes, procesos y servicios
+              que regulan.
+            </p>
+
+            <p>
+              Para utilizarlas en una inspección debe
+              determinarse qué regulan y qué supuesto
+              corresponde revisar. La semejanza entre
+              el título de una norma y el tema inspeccionado
+              no sustituye la comprobación de su alcance.
+            </p>
+
+            <p>
+              Las circulares obligatorias comunican
+              especificaciones, requerimientos o procedimientos
+              de carácter obligatorio como complemento
+              de un ordenamiento jurídico.
+              Las circulares de asesoramiento proporcionan
+              información y orientación técnica.
+              También existe la categoría de circulares
+              de orden.
+            </p>
+
+            <p>
+              Las cartas de política comunican aclaraciones,
+              lineamientos, disposiciones, políticas
+              y procedimientos complementarios.
+              Su consulta debe conservar la diferencia
+              entre la orientación del trabajo y el
+              fundamento del requisito que se verifica.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Naturaleza de los documentos
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Documento</th>
+                    <th scope="col">Función</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>NOM</td>
+                    <td>
+                      Establecer regulación técnica
+                      obligatoria en su ámbito.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Circular obligatoria</td>
+                    <td>
+                      Comunicar especificaciones,
+                      requerimientos o procedimientos
+                      obligatorios.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Circular de asesoramiento</td>
+                    <td>
+                      Proporcionar información
+                      y orientación técnica.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Carta de política</td>
+                    <td>
+                      Comunicar aclaraciones y lineamientos
+                      complementarios.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              El criterio de trabajo es identificar
+              primero la naturaleza del documento
+              y después la disposición relacionada
+              con el asunto. Una orientación no debe
+              convertirse automáticamente en una
+              obligación distinta de la que establece
+              el marco aplicable.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "8. Especialidades y manuales de trabajo",
+          `
+            <p>
+              Las tareas de vigilancia aeronáutica abarcan
+              distintas especialidades. Entre ellas
+              se encuentran licencias, operaciones,
+              aeronavegabilidad, navegación aérea,
+              aeródromos, seguridad de la aviación civil
+              y SMS/SSP.
+            </p>
+
+            <p>
+              La especialidad permite relacionar la
+              preparación del inspector con las funciones
+              que desempeña. Una revisión debe atender
+              el ámbito de competencia correspondiente
+              y coordinar los asuntos que involucren
+              a otras áreas.
+            </p>
+
+            <p>
+              Los manuales de especialidad organizan
+              funciones, actividades y procedimientos.
+              Entre ellos se encuentran el Manual del
+              Inspector de Aeronavegabilidad, MIA;
+              el Manual del Inspector de Operaciones,
+              MIO; y los manuales de licencias,
+              navegación aérea, aeródromos, AVSEC y SMS.
+            </p>
+
+            <p>
+              Al preparar una inspección conviene separar
+              dos preguntas: ¿qué disposición establece
+              el requisito? y ¿qué procedimiento organiza
+              su revisión? La primera permite identificar
+              el fundamento; la segunda orienta el
+              desarrollo del trabajo.
+            </p>
+
+            <div class="diagrama">
+              <h3>Preparación de la revisión</h3>
+
+              <ol class="flujo">
+                <li>Identifica la materia y la competencia.</li>
+                <li>Localiza el requisito aplicable.</li>
+                <li>Consulta el procedimiento correspondiente.</li>
+                <li>
+                  Define los documentos y las condiciones
+                  que deben comprobarse.
+                </li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "9. Actuación del inspector y registro de la visita",
+          `
+            <p>
+              La inspección combina una revisión técnica
+              con las formalidades de la actuación
+              administrativa. El conocimiento del requisito
+              debe acompañarse de una actuación identificable,
+              documentada y desarrollada dentro de su alcance.
+            </p>
+
+            <p>
+              En las visitas de verificación reguladas
+              por la Ley Federal de Procedimiento
+              Administrativo, la orden escrita delimita
+              el lugar o zona, el objeto, el alcance
+              y las disposiciones que fundamentan
+              la visita. El verificador debe acreditar
+              su función mediante la credencial
+              correspondiente y exhibir la orden.
+            </p>
+
+            <p>
+              El acta circunstanciada permite dejar
+              constancia de la diligencia: quiénes
+              intervinieron, cuándo se realizó,
+              dónde tuvo lugar y qué hechos
+              se hicieron constar.
+            </p>
+
+            <p>
+              La precisión del registro es importante
+              porque permite reconstruir la actuación.
+              Una conclusión sin identificación del
+              documento examinado, del hecho observado
+              o de la evidencia obtenida limita
+              la trazabilidad de la revisión.
+            </p>
+
+            <div class="diagrama">
+              <h3>De la actuación al expediente</h3>
+
+              <ol class="flujo">
+                <li>Identificar objeto y alcance.</li>
+                <li>Realizar la revisión.</li>
+                <li>Registrar hechos y participantes.</li>
+                <li>Integrar documentos y evidencias.</li>
+                <li>
+                  Continuar el trámite conforme
+                  al procedimiento aplicable.
+                </li>
+              </ol>
+            </div>
+
+            <p>
+              Las formalidades deben revisarse conforme
+              al tipo de actuación y a las disposiciones
+              aplicables. El esquema de una visita
+              no debe trasladarse mecánicamente
+              a cualquier actividad de vigilancia.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "10. Cumplimiento documental e implementación",
+          `
+            <p>
+              La verificación comprende dos aspectos
+              relacionados: el cumplimiento documental
+              y la implementación. El primero examina
+              los documentos que describen o registran
+              una actividad. El segundo comprueba
+              cómo se aplica lo establecido.
+            </p>
+
+            <p>
+              Un procedimiento puede estar disponible,
+              identificado y firmado, pero eso no demuestra
+              por sí solo que se ejecute correctamente.
+              Para comprobar su aplicación deben revisarse
+              los registros y las condiciones observables
+              que correspondan.
+            </p>
+
+            <p>
+              Por ejemplo, si un procedimiento exige
+              documentar una comprobación, encontrar
+              el procedimiento permite conocer lo
+              que debe hacerse. Los registros permiten
+              examinar qué se hizo, cuándo, sobre qué
+              elemento y por quién.
+            </p>
+
+            <p>
+              La ausencia de un registro en los documentos
+              revisados debe describirse con precisión.
+              No equivale automáticamente a demostrar
+              todos los hechos posibles sobre la actividad.
+              El inspector debe delimitar lo que observó,
+              identificar la evidencia disponible
+              y aclarar la información faltante.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Dos aspectos de una misma revisión
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Aspecto</th>
+                    <th scope="col">Pregunta de trabajo</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Cumplimiento documental</td>
+                    <td>
+                      ¿Qué documento establece o registra
+                      la actividad y qué contiene?
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Implementación</td>
+                    <td>
+                      ¿Qué evidencia permite comprobar
+                      cómo se aplica lo establecido?
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "11. Hallazgos: requisito, condición y evidencia",
+          `
+            <p>
+              Un hallazgo debe relacionar tres elementos:
+              el requisito aplicable, la condición observada
+              y la evidencia que respalda la descripción.
+              Esta relación permite comprender qué se
+              esperaba, qué se encontró y en qué se
+              sustenta la conclusión.
+            </p>
+
+            <p>
+              Expresiones como “no cumple” o “el control
+              es deficiente” son insuficientes cuando
+              no identifican la condición concreta.
+              La redacción debe permitir localizar
+              los documentos, registros o elementos
+              examinados y comprender la discrepancia.
+            </p>
+
+            <div class="diagrama">
+              <h3>Construcción de una observación sustentada</h3>
+
+              <ol class="flujo">
+                <li>Identificar el requisito aplicable.</li>
+                <li>Describir la condición observada.</li>
+                <li>Precisar la evidencia verificable.</li>
+                <li>
+                  Relacionar los elementos sin agregar
+                  hechos no comprobados.
+                </li>
+              </ol>
+            </div>
+
+            <p>
+              La integración del expediente comprende
+              el acta, las pruebas o evidencias
+              y la información necesaria para el
+              análisis técnico correspondiente.
+              El dictamen debe guardar relación
+              con los hechos y documentos examinados.
+            </p>
+
+            <p>
+              Detectar una discrepancia no equivale
+              a imponer automáticamente una sanción.
+              La actuación debe continuar por las
+              instancias y el procedimiento que
+              correspondan.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "12. Organismos nacionales y entorno de la inspección",
+          `
+            <p>
+              La actividad aeronáutica reúne autoridades,
+              prestadores de servicios, operadores,
+              instituciones educativas y asociaciones
+              profesionales. Reconocer la función
+              de cada participante ayuda a dirigir
+              correctamente las consultas y a identificar
+              el origen de los documentos.
+            </p>
+
+            <p>
+              Servicios a la Navegación en el Espacio
+              Aéreo Mexicano, SENEAM, se relaciona con
+              los servicios de ayuda a la navegación
+              aérea. Aeropuertos y Servicios Auxiliares,
+              ASA, participa en actividades aeroportuarias,
+              servicios auxiliares y combustibles
+              de aviación.
+            </p>
+
+            <p>
+              Los colegios y asociaciones profesionales
+              constituyen espacios de participación
+              del sector. Las instituciones educativas
+              contribuyen a la formación y al desarrollo
+              de conocimientos. Estas funciones deben
+              distinguirse de las atribuciones
+              de una autoridad.
+            </p>
+
+            <p>
+              Al concluir el módulo, conserva tres
+              criterios de trabajo: identificar
+              correctamente a la entidad que interviene,
+              localizar el instrumento aplicable
+              y sustentar las observaciones con
+              evidencia verificable.
+            </p>
+          `
+        )
+      ],
+
+      caso: {
+        titulo:
+          "Caso didáctico: revisión de registros " +
+          "de una comprobación",
+
+        contenido: `
+          <p>
+            Durante una revisión se presenta un procedimiento
+            que exige registrar una comprobación antes
+            de liberar una actividad. En los expedientes
+            R-01, R-02 y R-03 no se localiza ese registro.
+            La persona entrevistada indica que la comprobación
+            sí se realiza, pero no aporta todavía
+            evidencia adicional.
+          </p>
+
+          <p>
+            El borrador de la observación dice:
+            “La empresa tiene un control deficiente”.
+          </p>
+
+          <h3>¿Qué permite establecer la información disponible?</h3>
+
+          <p>
+            El procedimiento identifica una actividad
+            que debe documentarse. Los expedientes
+            delimitan los registros examinados.
+            La declaración de la persona entrevistada
+            aporta información que debe contrastarse
+            con la evidencia correspondiente.
+          </p>
+
+          <p>
+            No debe afirmarse que la comprobación
+            nunca se realiza si ese hecho no está
+            demostrado. La condición inicialmente
+            identificada es que no se localizó
+            el registro en los expedientes revisados.
+          </p>
+
+          <h3>¿Qué falta para sustentar la observación?</h3>
+
+          <ul>
+            <li>
+              Precisar el requisito aplicable
+              y el apartado correspondiente
+              del procedimiento.
+            </li>
+            <li>
+              Identificar los expedientes, las fechas
+              y la actividad revisada.
+            </li>
+            <li>
+              Aclarar si existen registros adicionales
+              que deban examinarse.
+            </li>
+            <li>
+              Relacionar la condición observada
+              con la evidencia disponible.
+            </li>
+          </ul>
+
+          <h3>¿Por qué debe corregirse el borrador?</h3>
+
+          <p>
+            “Control deficiente” es una valoración
+            general que no permite reconstruir
+            la revisión. Una descripción precisa
+            debe indicar qué se examinó, qué se
+            encontró y qué requisito corresponde,
+            sin incorporar hechos no comprobados.
+          </p>
+
+          <p class="estado">
+            Caso ficticio para análisis. Los identificadores
+            R-01, R-02 y R-03 no corresponden a expedientes
+            reales ni a formatos oficiales.
+          </p>
+        `
+      },
+
+      fuente:
+        "M01-CR-F-IVA-A-04-R00.pptx, diapositivas y notas. " +
+        "Desarrollo didáctico para IVA-A-04. Las versiones " +
+        "y la vigencia de los instrumentos citados deben " +
+        "comprobarse antes de su aplicación en una actuación.",
+
+      preguntas: [
+        crearPregunta(
+          "¿Qué distinción debe conservarse entre IATA " +
+          "y una autoridad aeronáutica?",
+          [
+            "Ambas desempeñan exactamente las mismas funciones.",
+            "IATA es una asociación de aerolíneas, no una " +
+              "autoridad aeronáutica.",
+            "IATA sustituye a las autoridades nacionales " +
+              "en las visitas de verificación."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué relación existe entre PANS y SARPS?",
+          [
+            "Tienen distinta categoría y procedimientos " +
+              "de aprobación o adopción.",
+            "Son dos nombres para el mismo documento.",
+            "Los PANS son registros internos de cada aerolínea."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Cuál de los siguientes elementos pertenece al " +
+          "grupo de establecimiento del sistema de vigilancia?",
+          [
+            "Resolución de problemas de seguridad operacional.",
+            "Vigilancia continua de titulares de certificados.",
+            "Personal técnico cualificado y orientación técnica."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué función corresponde a las obligaciones " +
+          "de vigilancia, CE-7?",
+          [
+            "Sustituir los requisitos por recomendaciones " +
+              "de una asociación.",
+            "Comprobar de forma continua que los titulares " +
+              "mantengan el cumplimiento.",
+            "Limitar la revisión al momento inicial " +
+              "de la certificación."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué diferencia existe entre una circular " +
+          "obligatoria y una de asesoramiento?",
+          [
+            "La primera tiene carácter obligatorio y la " +
+              "segunda proporciona información y orientación.",
+            "Las dos son leyes expedidas por el Congreso.",
+            "La de asesoramiento impone siempre los mismos " +
+              "requisitos que cualquier circular obligatoria."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué elementos deben relacionarse para sustentar " +
+          "un hallazgo?",
+          [
+            "La extensión del informe y su presentación visual.",
+            "La opinión del inspector y la antigüedad " +
+              "de la organización.",
+            "La condición observada, el fundamento aplicable " +
+              "y la evidencia."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿la existencia del " +
+          "procedimiento demuestra por sí sola su implementación?",
+          [
+            "No; también deben revisarse los registros " +
+              "y las evidencias de aplicación.",
+            "Sí; disponer del procedimiento demuestra " +
+              "todas las comprobaciones realizadas.",
+            "Sí; siempre que el documento tenga una portada."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿qué debe hacerse con el " +
+          "borrador que dice “La empresa tiene un control deficiente”?",
+          [
+            "Conservarlo sin cambios porque ya identifica " +
+              "todos los hechos.",
+            "Precisar el requisito, la condición observada " +
+              "y los expedientes que respaldan la descripción.",
+            "Convertirlo directamente en una sanción " +
+              "sin completar la revisión."
+          ]
+        )
+      ]
+    });
+
+    // FIN DEL BLOQUE M01. EL SIGUIENTE BLOQUE AGREGA M02.
+          modulos.push({
+      codigo: "M02",
+
+      titulo: "Expedición del certificado de aeronavegabilidad",
+
+      objetivo:
+        "Relacionar la revisión documental y física de la " +
+        "aeronave con la expedición de certificados, distinguir " +
+        "los trámites por cambio de componentes y reconocer " +
+        "las condiciones de los certificados estándar, " +
+        "especiales y de permiso especial de vuelo.",
+
+      tarjetas: [
+        {
+          titulo: "Identificación y conformidad",
+          texto:
+            "Relaciona la aeronave y sus componentes " +
+            "con sus documentos y configuración."
+        },
+        {
+          titulo: "Mantenimiento y registros",
+          texto:
+            "Comprueba el estado de mantenimiento, " +
+            "las acciones efectuadas y su trazabilidad."
+        },
+        {
+          titulo: "Tipo de certificado",
+          texto:
+            "Distingue el certificado estándar, el especial " +
+            "y el permiso especial de vuelo."
+        },
+        {
+          titulo: "Condiciones y limitaciones",
+          texto:
+            "Examina el propósito, las restricciones " +
+            "y el alcance de la certificación."
+        }
+      ],
+
+      lecciones: [
+        crearLeccion(
+          "1. Certificado de aeronavegabilidad: qué se comprueba",
+          `
+            <p>
+              La expedición de un certificado de aeronavegabilidad
+              requiere relacionar la identidad de la aeronave,
+              su configuración y su condición técnica con
+              los requisitos aplicables. La revisión no
+              consiste únicamente en comprobar que existe
+              una solicitud o que se pagaron derechos.
+            </p>
+
+            <p>
+              El certificado tipo se relaciona con el diseño.
+              El certificado de aeronavegabilidad corresponde
+              a una aeronave individual. Para evaluar esa
+              aeronave deben examinarse tanto su relación
+              con el diseño correspondiente como los registros
+              y condiciones que permitan establecer
+              su estado técnico.
+            </p>
+
+            <p>
+              El artículo 31 del Convenio sobre Aviación
+              Civil Internacional establece que una aeronave
+              empleada en la navegación internacional debe
+              estar provista de un certificado de
+              aeronavegabilidad expedido o convalidado
+              por el Estado de matrícula.
+            </p>
+
+            <p>
+              En la revisión técnica, el mantenimiento,
+              las modificaciones y las reparaciones deben
+              analizarse en relación con los requisitos
+              aceptables para el Estado de matrícula.
+              La configuración documentada y la condición
+              observada deben ser coherentes entre sí.
+            </p>
+
+            <div class="diagrama">
+              <h3>Relación básica de la revisión</h3>
+
+              <ol class="flujo">
+                <li>Identidad de la aeronave.</li>
+                <li>Diseño y configuración correspondiente.</li>
+                <li>Mantenimiento y antecedentes.</li>
+                <li>Inspección documental y física.</li>
+                <li>Conclusión técnica sustentada.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "2. Identificar el trámite antes de revisar el expediente",
+          `
+            <p>
+              Antes de solicitar o revisar documentos,
+              identifica qué se pretende tramitar.
+              El certificado estándar, el certificado
+              especial, el permiso especial de vuelo
+              y la certificación por cambio de componentes
+              no son denominaciones intercambiables.
+            </p>
+
+            <p>
+              La finalidad del trámite determina qué
+              condiciones deben comprobarse y qué
+              documentación corresponde examinar.
+              También es necesario distinguir entre
+              un otorgamiento y una revalidación,
+              atendiendo al supuesto concreto.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Modalidades que deben distinguirse
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Modalidad</th>
+                    <th scope="col">Enfoque de la revisión</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>
+                      Certificación por cambio de motor,
+                      hélice o rotores.
+                    </td>
+                    <td>
+                      Identidad, antecedentes, instalación,
+                      compatibilidad y registros del cambio.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Certificado estándar,
+                      formulario AFAC-18S.
+                    </td>
+                    <td>
+                      Cumplimiento de los requisitos
+                      correspondientes a la aeronave
+                      y a su categoría de certificación.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Certificado especial,
+                      formulario AFAC-18E.
+                    </td>
+                    <td>
+                      Supuesto de emisión, categoría,
+                      documentación y condiciones
+                      correspondientes.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Permiso especial de vuelo,
+                      formulario AFAC-18EV.
+                    </td>
+                    <td>
+                      Propósito específico del vuelo,
+                      condición técnica y restricciones
+                      que permitan efectuarlo con seguridad.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Una misma lista de documentos no debe
+              aplicarse automáticamente a todos los casos.
+              Identifica el procedimiento y la versión
+              de los requisitos que corresponden antes
+              de determinar la suficiencia del expediente.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "3. Solicitud, representación e identificación",
+          `
+            <p>
+              La revisión administrativa comienza por
+              identificar al solicitante, a la aeronave
+              y al trámite. Si interviene un representante,
+              deben examinarse los documentos que acrediten
+              su personalidad y el alcance de su representación.
+            </p>
+
+            <p>
+              La identidad de la aeronave debe conservarse
+              a lo largo de la solicitud, el certificado
+              de matrícula, los documentos técnicos
+              y los registros. Marca, modelo, número
+              de serie y matrícula permiten establecer
+              a qué aeronave corresponde la información.
+            </p>
+
+            <p>
+              Un documento legible no es necesariamente
+              un documento suficiente. Además de poder
+              leerse, debe contener los datos, fechas,
+              firmas y referencias que correspondan
+              a su finalidad.
+            </p>
+
+            <p>
+              Cuando proceda el cotejo, diferencia
+              la copia que se integra al expediente
+              del documento utilizado para comprobarla.
+              La revisión debe dejar claro qué se presentó
+              y qué se verificó.
+            </p>
+
+            <div class="diagrama">
+              <h3>Coherencia del expediente</h3>
+
+              <ol class="flujo">
+                <li>Solicitante identificado.</li>
+                <li>Representación acreditada, si aplica.</li>
+                <li>Aeronave individualizada.</li>
+                <li>Trámite y finalidad definidos.</li>
+                <li>Documentos relacionados entre sí.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "4. Documentos técnicos y configuración de la aeronave",
+          `
+            <p>
+              La documentación técnica permite relacionar
+              la aeronave con su diseño, sus limitaciones
+              y la configuración instalada. Entre los
+              elementos que deben examinarse, según
+              el trámite y su aplicabilidad, se encuentran
+              el certificado tipo o su convalidación,
+              el manual de vuelo y las aprobaciones
+              de modificaciones.
+            </p>
+
+            <p>
+              El manual de vuelo debe corresponder
+              a la aeronave y a su configuración.
+              Las modificaciones pueden requerir suplementos
+              o documentación adicional. Por ello,
+              comprobar solamente la portada no permite
+              concluir que el conjunto documental está
+              actualizado para la aeronave inspeccionada.
+            </p>
+
+            <p>
+              El plano de distribución de cabina, LOPA,
+              permite relacionar la disposición y el
+              número de asientos con la configuración
+              documentada cuando sea requerido.
+              La revisión debe considerar su correspondencia
+              con lo instalado.
+            </p>
+
+            <p>
+              El reporte de peso y balance permite examinar
+              los valores de masa y centro de gravedad.
+              Debe relacionarse con la configuración
+              de la aeronave y con los límites correspondientes,
+              no tratarse como un documento aislado.
+            </p>
+
+            <p>
+              La póliza de responsabilidad civil,
+              la documentación del servicio y base de
+              operaciones, la licencia de estación de radio
+              y los documentos de ruido se revisan
+              conforme a su aplicabilidad y a los requisitos
+              del trámite.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "5. Programa de mantenimiento y continuidad de los registros",
+          `
+            <p>
+              El programa de mantenimiento organiza
+              las tareas e intervalos aplicables.
+              Para examinar su cumplimiento, el inspector
+              debe relacionar lo programado con los
+              trabajos efectuados y con los registros
+              que acreditan su realización.
+            </p>
+
+            <p>
+              La revisión de una liberación debe permitir
+              identificar la aeronave o componente,
+              los trabajos correspondientes, la fecha
+              y los datos del responsable. El alcance
+              de lo liberado debe distinguirse de
+              cualquier actividad que no esté comprendida
+              en ese registro.
+            </p>
+
+            <p>
+              Las bitácoras relacionan los tiempos de
+              operación con mantenimiento, inspecciones,
+              reparaciones y cambios de componentes.
+              La continuidad entre sus anotaciones
+              y los controles técnicos permite reconstruir
+              los antecedentes de la aeronave.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Relación entre programación y cumplimiento
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Elemento</th>
+                    <th scope="col">Qué permite examinar</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Programa de mantenimiento.</td>
+                    <td>
+                      Tareas e intervalos que corresponden.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Registros de trabajos y liberaciones.</td>
+                    <td>
+                      Actividades efectuadas y alcance
+                      de la certificación del trabajo.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Bitácoras.</td>
+                    <td>
+                      Historial de operación,
+                      mantenimiento y cambios.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Controles de componentes.</td>
+                    <td>
+                      Estado acumulado y próximas
+                      acciones o límites.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Una diferencia entre documentos debe aclararse
+              antes de utilizar los datos para una conclusión
+              técnica. No debe elegirse el valor más favorable
+              ni suponerse que dos registros corresponden
+              al mismo componente sin identificarlo.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "6. Directivas de aeronavegabilidad y boletines de servicio",
+          `
+            <p>
+              Las directivas de aeronavegabilidad, AD,
+              establecen acciones obligatorias para
+              atender condiciones inseguras dentro
+              de su ámbito de aplicación. Los boletines
+              de servicio, SB, son documentos técnicos
+              emitidos por fabricantes.
+            </p>
+
+            <p>
+              Una AD y un SB no deben considerarse
+              equivalentes solo porque describan
+              una inspección o modificación.
+              Debe identificarse la naturaleza
+              de cada documento, su aplicabilidad
+              y la base que determina su cumplimiento.
+            </p>
+
+            <p>
+              El control debe permitir identificar
+              el documento, la aeronave o componente
+              al que corresponde, su aplicabilidad,
+              las acciones realizadas y la evidencia
+              de cumplimiento. Cuando una acción
+              sea repetitiva, debe poder determinarse
+              la próxima ejecución.
+            </p>
+
+            <p>
+              Una anotación de “no aplicable” requiere
+              una base identificable. El número de modelo,
+              el número de serie o la configuración
+              pueden ser relevantes para esa determinación.
+              La conclusión debe poder revisarse
+              a partir de los datos disponibles.
+            </p>
+
+            <div class="diagrama">
+              <h3>Secuencia de revisión</h3>
+
+              <ol class="flujo">
+                <li>Identificar el documento técnico.</li>
+                <li>Determinar su aplicabilidad.</li>
+                <li>Examinar las acciones y sus registros.</li>
+                <li>Comprobar el estado actualizado.</li>
+                <li>
+                  Identificar próximas acciones,
+                  cuando correspondan.
+                </li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "7. Componentes controlados y limitados por tiempo",
+          `
+            <p>
+              El control de componentes debe relacionar
+              cada unidad instalada con sus datos de
+              identificación y con los límites que
+              le correspondan. El número de parte
+              identifica una referencia de componente;
+              el número de serie permite individualizar
+              una unidad cuando corresponda.
+            </p>
+
+            <p>
+              Los límites y los intervalos pueden expresarse
+              en horas, ciclos o tiempo calendario.
+              Estas magnitudes no son intercambiables.
+              La revisión debe conservar la unidad
+              y el criterio que aplica a cada elemento.
+            </p>
+
+            <p>
+              Entre los datos de control se encuentran
+              la posición instalada, los tiempos desde
+              nuevo, los tiempos desde la última revisión
+              o servicio mayor, los límites de vida
+              y las próximas inspecciones o mantenimientos.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Datos para reconstruir el estado de una unidad
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Datos de revisión</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Identidad.</td>
+                    <td>
+                      Fabricante, número de parte,
+                      número de serie y posición.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Antecedentes.</td>
+                    <td>
+                      Registros de operación,
+                      instalación y mantenimiento.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Estado acumulado.</td>
+                    <td>
+                      Horas, ciclos o tiempo calendario,
+                      según corresponda.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Límites y próximas acciones.</td>
+                    <td>
+                      Vida límite, próxima inspección,
+                      mantenimiento o vencimiento.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              La coincidencia entre placa, registro de
+              instalación y control de componentes
+              es esencial para saber que se está
+              evaluando la misma unidad.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "8. Inspección física y evidencia de la configuración",
+          `
+            <p>
+              La revisión documental se complementa
+              con la inspección física de la aeronave.
+              Esta permite contrastar la información
+              del expediente con la identidad,
+              configuración y condición observables.
+            </p>
+
+            <p>
+              Las marcas de nacionalidad y matrícula
+              y las placas de identificación deben
+              relacionarse con los documentos.
+              La evidencia fotográfica debe permitir
+              reconocer los datos relevantes, no
+              limitarse a mostrar una imagen general
+              que impida leerlos.
+            </p>
+
+            <p>
+              En motores, hélices, rotores y otros
+              componentes identificables, compara
+              los números de parte y serie con los
+              registros correspondientes. Si una placa
+              fue sustituida, deben examinarse
+              los antecedentes que justifican
+              esa sustitución.
+            </p>
+
+            <p>
+              Los registradores de vuelo, equipos
+              de emergencia y otros sistemas se
+              revisan conforme a la aplicabilidad
+              correspondiente. La existencia de una
+              fotografía no demuestra por sí sola
+              su estado funcional o el cumplimiento
+              de las pruebas requeridas.
+            </p>
+
+            <div class="diagrama">
+              <h3>Documento y elemento instalado</h3>
+
+              <ol class="flujo">
+                <li>Identificar el registro.</li>
+                <li>Localizar el elemento en la aeronave.</li>
+                <li>Comparar los datos identificadores.</li>
+                <li>
+                  Examinar condición y evidencia
+                  de pruebas aplicables.
+                </li>
+                <li>Registrar coincidencias y discrepancias.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "9. Equipamiento, pruebas y reparaciones",
+          `
+            <p>
+              La lista de equipos instalados permite
+              identificar aviónica, radiocomunicación
+              y equipos de emergencia. Su revisión
+              debe relacionarse con la configuración
+              real y con los requisitos aplicables
+              a la aeronave y a su operación.
+            </p>
+
+            <p>
+              Los registros de pruebas y calibraciones
+              deben corresponder al equipo examinado
+              y permitir identificar el resultado
+              y la fecha pertinentes. No basta
+              encontrar un certificado de prueba
+              si no puede relacionarse con el
+              elemento instalado.
+            </p>
+
+            <p>
+              Para el transmisor localizador de emergencia,
+              ELT, la identificación del equipo y sus
+              baterías se complementa con los registros
+              de la prueba funcional y la documentación
+              de su codificación cuando corresponda.
+              Las pruebas deben realizarse por personal
+              calificado conforme a los procedimientos
+              aplicables, evitando falsas alertas.
+            </p>
+
+            <p>
+              Las reparaciones estructurales requieren
+              trazabilidad sobre su ubicación,
+              descripción y documentación técnica.
+              El mapeo de reparaciones ayuda a relacionar
+              la condición física con sus antecedentes.
+            </p>
+
+            <p>
+              Cuando existan modificaciones, reparaciones
+              en el extranjero o vuelos de prueba,
+              examina las aprobaciones, autorizaciones
+              y liberaciones correspondientes.
+              La documentación debe cubrir el trabajo
+              realmente efectuado.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "10. Certificación por cambio de motor, hélice o rotores",
+          `
+            <p>
+              La certificación por cambio de componentes
+              principales requiere comprobar la identidad
+              de la unidad, sus antecedentes, la compatibilidad
+              con la aeronave y los registros del trabajo.
+              La instalación debe relacionarse con
+              la configuración correspondiente.
+            </p>
+
+            <p>
+              El primer punto de análisis es determinar
+              si el componente y la configuración resultante
+              están comprendidos en el certificado tipo
+              o si requieren una aprobación de modificación.
+              Un componente físicamente instalable
+              no queda aceptado por esa sola circunstancia.
+            </p>
+
+            <p>
+              Cuando la configuración no esté comprendida
+              en el diseño correspondiente, deben examinarse
+              la aprobación de la modificación y los
+              documentos asociados. Entre ellos puede
+              encontrarse un certificado tipo suplementario,
+              STC, con la aceptación o convalidación
+              que corresponda.
+            </p>
+
+            <p>
+              Para una unidad procedente de otra aeronave,
+              el historial debe permitir reconstruir
+              sus antecedentes y estado. La procedencia,
+              los tiempos acumulados y las últimas
+              operaciones registradas son elementos
+              de la trazabilidad.
+            </p>
+
+            <div class="diagrama">
+              <h3>Revisión del cambio de componente</h3>
+
+              <ol class="flujo">
+                <li>Identificar la unidad y su procedencia.</li>
+                <li>Comprobar antecedentes y estado.</li>
+                <li>
+                  Determinar compatibilidad
+                  y configuración aprobada.
+                </li>
+                <li>
+                  Revisar instalación, pruebas
+                  y liberación.
+                </li>
+                <li>Actualizar y relacionar los registros.</li>
+              </ol>
+            </div>
+
+            <p>
+              Las facturas, los documentos de liberación
+              y las aprobaciones tienen finalidades
+              distintas. Un documento de adquisición
+              no sustituye los antecedentes técnicos
+              ni una aprobación de instalación.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "11. Certificado especial: formulario AFAC-18E",
+          `
+            <p>
+              El certificado especial de aeronavegabilidad
+              debe examinarse conforme al supuesto de
+              emisión y a la categoría correspondiente.
+              No es una denominación genérica para
+              resolver cualquier expediente incompleto.
+            </p>
+
+            <p>
+              Las categorías especiales pueden comprender
+              condiciones y propósitos de operación
+              particulares. Por ello, el inspector
+              debe relacionar el certificado con
+              la documentación de la aeronave,
+              las instrucciones de operación,
+              el mantenimiento y las limitaciones
+              que correspondan.
+            </p>
+
+            <p>
+              Entre las categorías que requieren
+              distinguirse se encuentran restringida,
+              experimental, ultraligera y ligero-deportiva.
+              No debe suponerse que todas comparten
+              los mismos requisitos o privilegios.
+            </p>
+
+            <p>
+              En el otorgamiento se examinan los requisitos
+              del supuesto inicial. En la revalidación,
+              la revisión debe comprobar que la aeronave
+              y sus componentes mantienen las condiciones
+              correspondientes y que el expediente
+              satisface los requisitos del trámite.
+            </p>
+
+            <p>
+              Antes de emitir una conclusión, identifica
+              la categoría, las condiciones documentadas
+              y las limitaciones de operación.
+              La denominación “especial” no autoriza
+              a omitir la comprobación de seguridad.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "12. Permiso especial de vuelo: formulario AFAC-18EV",
+          `
+            <p>
+              Un permiso especial de vuelo permite atender
+              un propósito específico bajo condiciones
+              y restricciones determinadas por la autoridad.
+              Puede relacionarse con el traslado de una
+              aeronave que no reúne todas las condiciones
+              normales de aeronavegabilidad, pero conserva
+              capacidad para realizar con seguridad
+              el vuelo que se pretende autorizar.
+            </p>
+
+            <p>
+              La necesidad de mover la aeronave no demuestra
+              esa capacidad. El expediente debe sustentar
+              la condición técnica, el propósito del vuelo
+              y las limitaciones necesarias.
+            </p>
+
+            <p>
+              Para un traslado por mantenimiento,
+              la declaración del taller autorizado
+              debe relacionarse con las inspecciones
+              y pruebas efectuadas, la aeronave
+              identificada y las limitaciones técnicas
+              correspondientes.
+            </p>
+
+            <p>
+              También deben examinarse los registros
+              de los últimos servicios y sus liberaciones,
+              así como los documentos adicionales
+              que correspondan al supuesto.
+              Una declaración general de que la aeronave
+              “puede volar” no sustituye ese análisis.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Aspectos del permiso especial de vuelo
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Aspecto</th>
+                    <th scope="col">Pregunta de revisión</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Propósito.</td>
+                    <td>
+                      ¿Qué vuelo específico
+                      se pretende realizar?
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Condición técnica.</td>
+                    <td>
+                      ¿Qué inspecciones y pruebas
+                      sustentan la capacidad para
+                      ese vuelo?
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Limitaciones.</td>
+                    <td>
+                      ¿Bajo qué restricciones
+                      puede efectuarse?
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Documentación.</td>
+                    <td>
+                      ¿Qué registros y declaraciones
+                      respaldan la solicitud?
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              El permiso no debe interpretarse como
+              una autorización general para operar
+              sin restricciones. Su alcance se limita
+              al propósito, las condiciones
+              y la vigencia autorizados.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "13. Certificado estándar: formulario AFAC-18S",
+          `
+            <p>
+              La expedición del certificado estándar
+              se relaciona con una aeronave de matrícula
+              definitiva, su categoría conforme al
+              certificado tipo y el cumplimiento
+              de los requisitos correspondientes.
+            </p>
+
+            <p>
+              La revisión debe integrar los antecedentes
+              de diseño, la configuración instalada,
+              el mantenimiento, los controles técnicos
+              y los resultados de la inspección física.
+              Ninguno de esos elementos debe analizarse
+              desconectado de los demás.
+            </p>
+
+            <p>
+              La revalidación exige comprobar que
+              se mantienen las condiciones correspondientes.
+              La existencia del certificado anterior
+              no sustituye la revisión del estado actual
+              de la aeronave y sus componentes.
+            </p>
+
+            <p>
+              Las categorías de certificación no deben
+              deducirse únicamente del uso comercial,
+              del aspecto o del tamaño de la aeronave.
+              Deben identificarse en la documentación
+              de certificación correspondiente.
+            </p>
+
+            <div class="diagrama">
+              <h3>Integración de la conclusión</h3>
+
+              <ol class="flujo">
+                <li>Confirmar identidad y categoría.</li>
+                <li>Revisar diseño y configuración.</li>
+                <li>Examinar mantenimiento y controles.</li>
+                <li>Contrastar con la inspección física.</li>
+                <li>
+                  Resolver discrepancias
+                  y documentar el resultado.
+                </li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "14. Cierre de la revisión y consistencia del expediente",
+          `
+            <p>
+              Antes de concluir la revisión, comprueba
+              que el expediente permita reconstruir
+              la relación entre solicitud, documentos,
+              aeronave inspeccionada y resultado técnico.
+              La identidad y configuración deben mantenerse
+              consistentes en todo el conjunto.
+            </p>
+
+            <p>
+              Las diferencias de números de serie,
+              tiempos, fechas o alcance de una liberación
+              deben aclararse. No deben corregirse
+              mediante suposiciones ni mediante
+              la sustitución informal de datos.
+            </p>
+
+            <p>
+              Para cada trámite deben comprobarse
+              los formularios, apéndices, derechos
+              y plazos de la versión aplicable.
+              No utilices un plazo de otra modalidad
+              ni confundas la vigencia de un certificado
+              con un plazo administrativo para
+              gestionar su revalidación.
+            </p>
+
+            <p>
+              La conclusión debe expresar lo comprobado
+              y dejar identificadas las discrepancias
+              pendientes. La expedición o revalidación
+              se sustenta en el cumplimiento del
+              supuesto correspondiente, no solamente
+              en la recepción de documentos.
+            </p>
+          `
+        )
+      ],
+
+      caso: {
+        titulo:
+          "Caso didáctico: cambio de motor " +
+          "y solicitud de traslado",
+
+        contenido: `
+          <p>
+            Una aeronave recibió un motor procedente
+            de otra unidad. El solicitante presenta
+            una factura, una copia parcial del historial
+            y un registro de instalación.
+          </p>
+
+          <p>
+            El número de serie del motor en el control
+            de componentes no coincide con el que
+            aparece en la placa fotografiada.
+            Además, el expediente no permite determinar
+            si la configuración está comprendida
+            en el diseño correspondiente.
+          </p>
+
+          <p>
+            El solicitante pide autorizar un traslado
+            a otro aeródromo para terminar los trabajos,
+            pero no incorpora una declaración técnica
+            que describa las inspecciones, pruebas
+            y limitaciones para ese vuelo.
+          </p>
+
+          <h3>Primera revisión: identidad y antecedentes</h3>
+
+          <p>
+            La factura no basta para establecer
+            el estado técnico de la unidad.
+            Es necesario aclarar la diferencia
+            de números de serie y relacionar
+            el motor instalado con sus antecedentes
+            de operación y mantenimiento.
+          </p>
+
+          <h3>Segunda revisión: configuración</h3>
+
+          <p>
+            Debe determinarse si el motor y la configuración
+            resultante están comprendidos en el diseño
+            aplicable o requieren una aprobación
+            de modificación. La instalación física
+            no demuestra esa conformidad.
+          </p>
+
+          <h3>Tercera revisión: propósito del vuelo</h3>
+
+          <p>
+            La solicitud de traslado no sustituye
+            la evidencia de capacidad para efectuar
+            un vuelo seguro. Deben examinarse
+            el sustento técnico y las limitaciones
+            correspondientes antes de concluir
+            sobre el permiso especial de vuelo.
+          </p>
+
+          <p class="estado">
+            Caso ficticio para análisis. No constituye
+            una determinación sobre una aeronave real
+            ni una autorización de vuelo.
+          </p>
+        `
+      },
+
+      fuente:
+        "M02-CR-F-IVA-A-04-R00.pptx, diapositivas y notas. " +
+        "Desarrollo didáctico para IVA-A-04. Se excluyen " +
+        "de la evaluación los plazos contradictorios " +
+        "y las equivalencias documentales pendientes " +
+        "de comprobación. Las versiones de formularios " +
+        "y disposiciones deben verificarse para " +
+        "su aplicación en cada trámite.",
+
+      preguntas: [
+        crearPregunta(
+          "¿Qué relación debe examinarse para evaluar " +
+          "la aeronavegabilidad de una aeronave individual?",
+          [
+            "Únicamente la existencia del pago de derechos.",
+            "La identidad, configuración, mantenimiento " +
+              "y condición técnica frente a los requisitos.",
+            "Solo el aspecto exterior de la aeronave."
+          ]
+        ),
+
+        crearPregunta(
+          "Antes de revisar un cambio de motor, " +
+          "¿qué debe determinarse sobre la configuración?",
+          [
+            "Si está comprendida en el diseño aplicable " +
+              "o requiere una aprobación de modificación.",
+            "Si la factura tiene más páginas que el historial.",
+            "Si el motor puede instalarse físicamente, " +
+              "sin examinar otras condiciones."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué permite individualizar una unidad " +
+          "de componente cuando corresponde?",
+          [
+            "El color de su embalaje.",
+            "El nombre del propietario de la aeronave.",
+            "Su número de serie relacionado con " +
+              "los registros correspondientes."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Cómo deben tratarse los límites expresados " +
+          "en horas, ciclos o tiempo calendario?",
+          [
+            "Como valores intercambiables.",
+            "Conservando la unidad y el criterio " +
+              "aplicable a cada componente.",
+            "Utilizando siempre el valor numérico mayor."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué debe permitir comprobar el control " +
+          "de una directiva de aeronavegabilidad?",
+          [
+            "Su aplicabilidad, las acciones realizadas " +
+              "y el estado de cumplimiento.",
+            "Solo el nombre del fabricante.",
+            "Únicamente que existe una carpeta " +
+              "con documentos técnicos."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué caracteriza a un permiso especial de vuelo?",
+          [
+            "Autoriza cualquier operación sin restricciones.",
+            "Sustituye automáticamente todos los " +
+              "registros de mantenimiento.",
+            "Se relaciona con un propósito específico " +
+              "y condiciones y limitaciones autorizadas."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿qué corresponde hacer " +
+          "ante la diferencia de números de serie?",
+          [
+            "Aclarar la identidad del motor y relacionarla " +
+              "con sus antecedentes y registros.",
+            "Elegir el número que aparezca más veces.",
+            "Ignorar la diferencia porque existe una factura."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿la necesidad de trasladar " +
+          "la aeronave demuestra que puede realizar " +
+          "el vuelo con seguridad?",
+          [
+            "Sí; el destino de mantenimiento " +
+              "es prueba suficiente.",
+            "No; debe examinarse el sustento técnico " +
+              "y las limitaciones correspondientes.",
+            "Sí; siempre que la solicitud esté firmada."
+          ]
+        )
+      ]
+    });
+
+    // FIN DEL BLOQUE M02. EL SIGUIENTE BLOQUE AGREGA M03.
+          modulos.push({
+      codigo: "M03",
+
+      titulo: "Inspección en rampa",
+
+      objetivo:
+        "Organizar la inspección en rampa, relacionar la " +
+        "revisión documental con las condiciones observadas, " +
+        "registrar correctamente sus resultados y dar " +
+        "seguimiento a las discrepancias.",
+
+      tarjetas: [
+        {
+          titulo: "Preparación",
+          texto:
+            "Identifica el alcance, los antecedentes " +
+            "y las características de la aeronave."
+        },
+        {
+          titulo: "Revisión",
+          texto:
+            "Relaciona documentos, registros, equipos " +
+            "y condiciones observables."
+        },
+        {
+          titulo: "Registro",
+          texto:
+            "Distingue cumplimiento, incumplimiento, " +
+            "no aplicabilidad y aspectos no revisados."
+        },
+        {
+          titulo: "Seguimiento",
+          texto:
+            "Sustenta las discrepancias y comprueba " +
+            "las acciones realizadas para atenderlas."
+        }
+      ],
+
+      lecciones: [
+        crearLeccion(
+          "1. Finalidad de la inspección en rampa",
+          `
+            <p>
+              La inspección en rampa forma parte de la
+              vigilancia de la seguridad operacional.
+              Permite examinar documentos y condiciones
+              de una aeronave durante su operación,
+              identificar discrepancias y verificar
+              aspectos del cumplimiento normativo.
+            </p>
+
+            <p>
+              Su alcance debe distinguirse de una revisión
+              integral de todos los antecedentes del
+              explotador. La inspección se realiza
+              en un contexto operativo concreto y debe
+              dejar identificado qué se examinó,
+              qué no pudo revisarse y qué requiere
+              seguimiento.
+            </p>
+
+            <p>
+              El artículo 16 del Convenio sobre Aviación
+              Civil Internacional reconoce a las autoridades
+              competentes de los Estados contratantes
+              el derecho a inspeccionar las aeronaves
+              de otros Estados contratantes a su llegada
+              o salida, y a examinar los certificados
+              y documentos prescritos por el Convenio,
+              sin causar demoras innecesarias.
+            </p>
+
+            <p>
+              Evitar demoras innecesarias exige organizar
+              el trabajo y coordinarlo con las personas
+              correspondientes. No significa omitir
+              una discrepancia ni dar por cumplido
+              un aspecto que no se ha comprobado.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "2. La inspección dentro del programa de vigilancia",
+          `
+            <p>
+              La vigilancia comprende actividades relacionadas,
+              entre ellas las inspecciones en rampa
+              y las verificaciones técnico-administrativas.
+              Sus resultados permiten identificar
+              condiciones que requieren revisión
+              o seguimiento más detallado.
+            </p>
+
+            <p>
+              La planificación considera la frecuencia
+              de operaciones, las temporadas de mayor
+              tráfico y los resultados de inspecciones
+              anteriores. También pueden motivar
+              atención especial el inicio de operaciones,
+              la apertura de un destino, los reportes
+              de otras autoridades o la ocurrencia
+              de eventos de seguridad operacional.
+            </p>
+
+            <p>
+              Estos antecedentes orientan la selección
+              y preparación de las actividades.
+              No sustituyen la comprobación de los
+              hechos de una inspección particular:
+              un antecedente desfavorable no demuestra
+              por sí solo un incumplimiento actual.
+            </p>
+
+            <div class="diagrama">
+              <h3>Relación entre planificación y seguimiento</h3>
+
+              <ol class="flujo">
+                <li>Examinar antecedentes y operaciones.</li>
+                <li>Definir alcance y organización.</li>
+                <li>Realizar la inspección.</li>
+                <li>Registrar sus resultados.</li>
+                <li>
+                  Utilizar los resultados para
+                  orientar el seguimiento.
+                </li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "3. Preparación del inspector",
+          `
+            <p>
+              Antes de iniciar, el inspector debe conocer
+              el propósito y el alcance de la actividad.
+              También debe familiarizarse con los
+              equipos de vuelo que serán revisados
+              y con los requisitos que correspondan
+              a la aeronave y a su operación.
+            </p>
+
+            <p>
+              La preparación incluye consultar
+              los procedimientos de inspección aplicables
+              y disponer de la lista de verificación
+              correspondiente. El Manual del Inspector
+              de Operaciones, MIO, y el Manual del
+              Inspector de Aeronavegabilidad, MIA,
+              constituyen referencias de trabajo
+              según el ámbito de la revisión.
+            </p>
+
+            <p>
+              El inspector debe llevar su identificación
+              vigente y la documentación de acceso
+              aeroportuario que corresponda.
+              La preparación técnica y la acreditación
+              de la función son aspectos distintos
+              que deben atenderse.
+            </p>
+
+            <p>
+              También conviene revisar los antecedentes
+              disponibles para evitar duplicar
+              actividades y para identificar puntos
+              que requieran continuidad.
+              El alcance previsto debe guardar relación
+              con los recursos y las condiciones
+              de la inspección.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "4. Inicio y coordinación de la inspección",
+          `
+            <p>
+              Al comenzar, el inspector se presenta
+              ante el comandante, la tripulación
+              o la persona que corresponda, se identifica
+              y comunica el propósito y el alcance
+              de la inspección.
+            </p>
+
+            <p>
+              La comunicación inicial permite organizar
+              el acceso a los documentos y a las áreas
+              que se revisarán. Debe aclararse que
+              la actividad se realizará evitando
+              demoras innecesarias, sin comprometer
+              la atención de las condiciones detectadas.
+            </p>
+
+            <p>
+              La consulta de la bitácora permite conocer
+              los antecedentes operativos y el estado
+              de una inspección previa. Si existen
+              secciones revisadas o pendientes,
+              deben identificarse antes de continuar,
+              conforme al procedimiento aplicable.
+            </p>
+
+            <p>
+              Una inspección anterior no permite asumir
+              que cualquier condición posterior
+              ya fue examinada. Debe distinguirse
+              el alcance de lo registrado de aquello
+              que se observa en la actuación actual.
+            </p>
+
+            <div class="diagrama">
+              <h3>Inicio ordenado</h3>
+
+              <ol class="flujo">
+                <li>Presentarse e identificarse.</li>
+                <li>Comunicar propósito y alcance.</li>
+                <li>Consultar antecedentes disponibles.</li>
+                <li>Coordinar documentos y acceso.</li>
+                <li>Iniciar la revisión correspondiente.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "5. Áreas de revisión",
+          `
+            <p>
+              La organización por áreas facilita
+              una revisión sistemática. Deben distinguirse
+              el puesto de pilotaje, la cabina y sus
+              aspectos de seguridad, el estado exterior,
+              la carga y los aspectos generales.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Organización de las áreas de inspección
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Área</th>
+                    <th scope="col">Enfoque de la revisión</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>A. Puesto de pilotaje.</td>
+                    <td>
+                      Documentos y elementos comprendidos
+                      en la sección correspondiente
+                      de la lista aplicable.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>B. Cabina y seguridad.</td>
+                    <td>
+                      Condiciones y equipos de cabina
+                      incluidos en el alcance.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>C. Estado exterior.</td>
+                    <td>
+                      Condiciones observables
+                      de la aeronave y su relación
+                      con los registros pertinentes.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>D. Carga.</td>
+                    <td>
+                      Aspectos de carga comprendidos
+                      en la lista de verificación.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>E. General.</td>
+                    <td>
+                      Otros aspectos previstos
+                      en el formato correspondiente.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Las áreas organizan el trabajo, pero
+              no sustituyen la lista oficial ni
+              los criterios técnicos de cada punto.
+              La revisión debe conservar la identificación
+              del elemento examinado y su resultado.
+            </p>
+
+            <p>
+              Si una sección no puede completarse,
+              debe registrarse esa condición.
+              No debe presentarse como inspeccionada
+              una parte que quedó fuera de la revisión.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "6. Bitácora y discrepancias de mantenimiento",
+          `
+            <p>
+              La bitácora permite relacionar los reportes
+              de la operación con las acciones de
+              mantenimiento correspondientes.
+              La revisión debe examinar si las
+              discrepancias de los tramos anteriores
+              están registradas y cómo fueron atendidas.
+            </p>
+
+            <p>
+              El inspector debe distinguir entre
+              una discrepancia reportada, una acción
+              de mantenimiento y una liberación.
+              La existencia de una anotación no demuestra
+              por sí sola que la condición se resolvió.
+            </p>
+
+            <p>
+              Los registros del trabajo deben permitir
+              identificar la tarea realizada o su
+              referencia técnica, las personas que
+              efectuaron y aprobaron el trabajo
+              y los datos de licencia correspondientes.
+              También debe comprobarse la inspección
+              interna cuando aplique.
+            </p>
+
+            <p>
+              Los reportes recurrentes requieren atención
+              porque pueden mostrar una tendencia.
+              Deben examinarse los antecedentes
+              y las acciones registradas, sin concluir
+              automáticamente que se trata de hechos
+              aislados o de una condición ya resuelta.
+            </p>
+
+            <div class="diagrama">
+              <h3>Lectura relacionada de los registros</h3>
+
+              <ol class="flujo">
+                <li>Identificar el reporte.</li>
+                <li>Examinar la acción registrada.</li>
+                <li>Comprobar su referencia técnica.</li>
+                <li>Identificar ejecución y aprobación.</li>
+                <li>Determinar el estado documentado.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "7. Diferidos y Lista de Equipo Mínimo",
+          `
+            <p>
+              La Lista de Equipo Mínimo, MEL,
+              establece condiciones bajo las cuales
+              determinados equipos pueden permanecer
+              inoperativos. Un diferido debe examinarse
+              contra la MEL aprobada correspondiente,
+              no contra una regla general aplicada
+              indistintamente.
+            </p>
+
+            <p>
+              La revisión debe relacionar el equipo
+              afectado, el ítem aplicable, la fecha
+              del diferido, la categoría y el intervalo
+              de rectificación. También debe considerar
+              las condiciones y los procedimientos
+              asociados al ítem.
+            </p>
+
+            <p>
+              La categoría, por sí sola, no demuestra
+              que un diferido sea aceptable.
+              Debe comprobarse cómo se determina
+              el plazo y qué condiciones deben
+              mantenerse durante su aplicación.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Datos que deben relacionarse en un diferido
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Dato</th>
+                    <th scope="col">Finalidad</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Equipo e ítem MEL.</td>
+                    <td>
+                      Comprobar que el supuesto
+                      corresponde al equipo afectado.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Fecha y categoría.</td>
+                    <td>
+                      Determinar el intervalo
+                      conforme a las reglas aprobadas.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Condiciones y procedimientos.</td>
+                    <td>
+                      Examinar las restricciones
+                      y acciones asociadas.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Estado y registros.</td>
+                    <td>
+                      Comprobar seguimiento
+                      y rectificación cuando corresponda.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              No calcules un vencimiento únicamente
+              convirtiendo días en horas sin revisar
+              la regla de cómputo aplicable.
+              La conclusión debe sustentarse
+              en la MEL y los registros correspondientes.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "8. Uso de la lista de verificación",
+          `
+            <p>
+              La lista de verificación registra
+              el resultado de cada punto.
+              Sus respuestas tienen significados
+              distintos y no deben utilizarse
+              para ocultar información faltante.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Significado de las respuestas
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Respuesta</th>
+                    <th scope="col">Significado</th>
+                    <th scope="col">Criterio de registro</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>SÍ</td>
+                    <td>Cumple.</td>
+                    <td>
+                      El aspecto fue revisado
+                      y se comprobó su cumplimiento.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>NO</td>
+                    <td>No cumple.</td>
+                    <td>
+                      Se identificó una discrepancia
+                      que debe describirse
+                      y sustentarse.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>N/A</td>
+                    <td>No aplica.</td>
+                    <td>
+                      El requisito no corresponde
+                      al supuesto examinado.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>N/R</td>
+                    <td>No revisado.</td>
+                    <td>
+                      El punto no pudo examinarse.
+                      No acredita cumplimiento
+                      ni no aplicabilidad.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              N/A y N/R no son equivalentes.
+              Si un punto no pudo revisarse,
+              no debe marcarse como no aplicable
+              para completar el formato.
+              La razón de la falta de revisión
+              debe quedar identificada cuando corresponda.
+            </p>
+
+            <p>
+              El registro debe permitir comprender
+              el alcance real de la inspección.
+              Una lista llena no demuestra una
+              revisión completa si sus respuestas
+              no corresponden a lo comprobado.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "9. Hallazgos y evaluación de severidad",
+          `
+            <p>
+              Una discrepancia debe describirse
+              de manera que permita identificar
+              el requisito, la condición observada
+              y la evidencia que respalda el resultado.
+              La descripción debe distinguir
+              los hechos de las valoraciones generales.
+            </p>
+
+            <p>
+              Además de registrar el hallazgo,
+              corresponde evaluar su severidad
+              conforme al criterio del procedimiento
+              aplicable. La clasificación no debe
+              asignarse por intuición ni sustituirse
+              con una descripción informal.
+            </p>
+
+            <p>
+              Si el asunto requiere un análisis
+              más detallado, deben identificarse
+              las secciones correspondientes
+              del cierre y remitirse los antecedentes
+              al área competente para su análisis
+              y seguimiento.
+            </p>
+
+            <p>
+              La necesidad de análisis adicional
+              no elimina la obligación de conservar
+              la evidencia disponible. Deben mantenerse
+              identificados la aeronave, el punto
+              revisado, los registros y las
+              comunicaciones relacionadas.
+            </p>
+
+            <div class="diagrama">
+              <h3>Tratamiento de una discrepancia</h3>
+
+              <ol class="flujo">
+                <li>Describir la condición.</li>
+                <li>Identificar requisito y evidencia.</li>
+                <li>
+                  Evaluar conforme al criterio
+                  de severidad aplicable.
+                </li>
+                <li>Coordinar la atención correspondiente.</li>
+                <li>Conservar el seguimiento documentado.</li>
+              </ol>
+            </div>
+          `
+        ),
+
+        crearLeccion(
+          "10. Seguimiento y comprobación de acciones",
+          `
+            <p>
+              El seguimiento conecta la discrepancia
+              con las acciones adoptadas para atenderla.
+              Debe coordinarse con el representante
+              correspondiente del operador y conservar
+              la trazabilidad del asunto.
+            </p>
+
+            <p>
+              Una declaración de que el problema
+              fue corregido no sustituye la comprobación.
+              Según la naturaleza de la discrepancia,
+              deben examinarse la condición física
+              y los documentos que respaldan
+              la acción realizada.
+            </p>
+
+            <p>
+              Las órdenes de trabajo, las referencias
+              de ingeniería, las liberaciones
+              y otros soportes deben corresponder
+              a la aeronave o componente afectado.
+              No basta incorporar un documento
+              de apariencia similar o de otro evento.
+            </p>
+
+            <p>
+              Si corresponde elaborar un acta,
+              deben identificarse las personas
+              que participaron y los datos requeridos.
+              La documentación del seguimiento
+              debe permitir conocer qué se hizo,
+              cuándo y con qué resultado.
+            </p>
+
+            <p>
+              Una discrepancia no debe darse por
+              resuelta solo porque se recibió
+              un archivo. Debe comprobarse
+              que su contenido responde
+              al asunto pendiente.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "11. Cierre, secciones pendientes y continuidad",
+          `
+            <p>
+              El cierre debe reflejar el alcance
+              real de la inspección.
+              Es necesario distinguir una revisión
+              concluida de una que dejó secciones
+              pendientes.
+            </p>
+
+            <p>
+              Los registros deben identificar
+              el aeropuerto, la fecha, el inspector
+              y las secciones correspondientes.
+              Si otra actuación continúa una revisión,
+              debe poder relacionarse con el inicio
+              y con los puntos que faltaban.
+            </p>
+
+            <p>
+              No debe utilizarse la constancia
+              de una inspección parcial para
+              afirmar que toda la aeronave
+              fue revisada. De igual manera,
+              la conclusión de las secciones
+              pendientes debe quedar documentada
+              de forma diferenciada.
+            </p>
+
+            <p>
+              Antes de continuar una inspección,
+              verifica las condiciones temporales
+              y de coordinación del procedimiento.
+              No supongas que cualquier revisión
+              de una fecha anterior puede cerrarse
+              mediante una anotación posterior.
+            </p>
+          `
+        ),
+
+        crearLeccion(
+          "12. Formatos, registro y validación",
+          `
+            <p>
+              La documentación debe corresponder
+              al tipo de aeronave y a la finalidad
+              del registro. Deben distinguirse
+              la lista de verificación, la notificación
+              de hallazgos y el reporte dirigido
+              al operador.
+            </p>
+
+            <div class="tabla-contenedor">
+              <table>
+                <caption>
+                  Identificación de los formatos de trabajo
+                </caption>
+
+                <thead>
+                  <tr>
+                    <th scope="col">Identificador</th>
+                    <th scope="col">Finalidad</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>AFAC-SA-IRNA</td>
+                    <td>
+                      Lista de verificación de
+                      inspección en rampa para
+                      aeronaves nacionales.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>AFAC-SA-IREX</td>
+                    <td>
+                      Lista de verificación de
+                      inspección en rampa para
+                      aeronaves extranjeras.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>AFAC-SA-IR-NHE</td>
+                    <td>
+                      Reporte para notificación
+                      de hallazgos de aeronaves
+                      con matrícula extranjera.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>AFAC-SA-IR-RA</td>
+                    <td>Reporte para la aerolínea.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              Antes de utilizar un formato,
+              comprueba su edición y su correspondencia
+              con el procedimiento aplicable.
+              La identificación de un formulario
+              no sustituye la revisión de
+              sus instrucciones de llenado.
+            </p>
+
+            <p>
+              El registro de la información en SIMOSA
+              y su validación por la función
+              correspondiente forman parte de
+              la trazabilidad de la inspección.
+              Los datos capturados deben guardar
+              coherencia con los formatos,
+              las evidencias y el cierre.
+            </p>
+
+            <p>
+              La captura y la validación son
+              actividades distintas.
+              Registrar una inspección no significa
+              que ya se completó la comprobación
+              correspondiente de su información.
+            </p>
+          `
+        )
+      ],
+
+      caso: {
+        titulo:
+          "Caso didáctico: un diferido " +
+          "y una sección no revisada",
+
+        contenido: `
+          <p>
+            Durante una inspección en rampa se identifica
+            un equipo registrado como inoperativo
+            y diferido por MEL. La bitácora contiene
+            la fecha del reporte y una categoría,
+            pero aún no se ha cotejado el ítem
+            correspondiente de la MEL aprobada.
+          </p>
+
+          <p>
+            Al mismo tiempo, una sección de la inspección
+            no puede revisarse en ese momento.
+            El borrador de la lista la marca
+            como N/A para no dejarla pendiente.
+          </p>
+
+          <p>
+            El representante del operador informa
+            que el equipo ya fue atendido, pero
+            la orden de trabajo entregada identifica
+            una aeronave distinta.
+          </p>
+
+          <h3>Revisión del diferido</h3>
+
+          <p>
+            La categoría y la fecha deben relacionarse
+            con el ítem de la MEL, las reglas
+            de cómputo y las condiciones aplicables.
+            No corresponde concluir sobre el plazo
+            sin examinar esa información.
+          </p>
+
+          <h3>Registro de la sección pendiente</h3>
+
+          <p>
+            La sección no revisada no debe registrarse
+            como no aplicable. Debe reflejarse
+            el alcance real y documentarse
+            la continuidad que corresponda.
+          </p>
+
+          <h3>Comprobación de la acción informada</h3>
+
+          <p>
+            Una orden de trabajo de otra aeronave
+            no demuestra la corrección de la
+            discrepancia observada. Debe obtenerse
+            y examinarse la documentación relacionada
+            con la aeronave inspeccionada.
+          </p>
+
+          <p class="estado">
+            Caso ficticio para análisis.
+            No asigna una categoría de severidad
+            ni determina la condición de despacho
+            de una aeronave real.
+          </p>
+        `
+      },
+
+      fuente:
+        "M03-CR-F-IVA-A-04-R00.pptx, diapositivas y notas. " +
+        "Desarrollo didáctico para IVA-A-04. Antes de " +
+        "la publicación deben comprobarse las versiones " +
+        "de los procedimientos, los formatos, los criterios " +
+        "de severidad y las instrucciones de registro. " +
+        "Los intervalos MEL deben examinarse contra " +
+        "la documentación aprobada correspondiente.",
+
+      preguntas: [
+        crearPregunta(
+          "¿Qué criterio establece el artículo 16 del " +
+          "Convenio sobre Aviación Civil Internacional " +
+          "respecto a la inspección de aeronaves?",
+          [
+            "Debe realizarse sin causar demoras innecesarias.",
+            "Permite omitir cualquier discrepancia " +
+              "para evitar una demora.",
+            "Impide examinar certificados " +
+              "de aeronaves extranjeras."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué debe comunicar el inspector al iniciar " +
+          "la inspección en rampa?",
+          [
+            "Únicamente la duración estimada.",
+            "Solo el nombre del operador.",
+            "Su identificación, el propósito " +
+              "y el alcance de la inspección."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Para qué se revisan los reportes " +
+          "de mantenimiento recurrentes?",
+          [
+            "Para asumir que todos ya fueron resueltos.",
+            "Para identificar posibles tendencias " +
+              "y examinar las acciones registradas.",
+            "Para sustituir la inspección " +
+              "por una lista de reportes."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Qué información debe relacionarse " +
+          "al examinar un diferido por MEL?",
+          [
+            "El ítem aplicable, la fecha, la categoría, " +
+              "el intervalo y las condiciones correspondientes.",
+            "Solo el número total de páginas de la MEL.",
+            "La categoría, sin consultar " +
+              "ninguna otra condición."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Cuál es la diferencia entre N/A y N/R?",
+          [
+            "Ambas respuestas significan que cumple.",
+            "N/A significa no revisado y N/R no aplica.",
+            "N/A significa no aplica y N/R no revisado."
+          ]
+        ),
+
+        crearPregunta(
+          "¿Cómo debe evaluarse la severidad " +
+          "de una discrepancia?",
+          [
+            "Según la extensión del comentario escrito.",
+            "Conforme al criterio del procedimiento aplicable.",
+            "Únicamente según la opinión del operador."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿qué corresponde hacer " +
+          "con la sección que no pudo revisarse?",
+          [
+            "Registrar que no fue revisada y documentar " +
+              "la continuidad que corresponda.",
+            "Marcarla como no aplicable para completar la lista.",
+            "Marcarla como cumplida porque no hay evidencia."
+          ]
+        ),
+
+        crearPregunta(
+          "En el caso didáctico, ¿la orden de trabajo " +
+          "de otra aeronave demuestra la corrección " +
+          "de la discrepancia?",
+          [
+            "Sí; basta con que el trabajo tenga " +
+              "una descripción parecida.",
+            "Sí; siempre que el operador lo afirme.",
+            "No; debe relacionarse la evidencia " +
+              "con la aeronave y el asunto inspeccionados."
+          ]
+        )
+      ]
+    });
+
+    // FIN DEL BLOQUE M03.
+    // EL SIGUIENTE BLOQUE AGREGA LA NAVEGACIÓN Y LAS ACTIVIDADES.
+          let usuarioCurso = null;
+    let estadoCurso = null;
+    let moduloActual = 0;
+    let envioEnProceso = false;
+    let consultaEnProceso = false;
+
+    const borradoresCurso = new Map();
+    const lecturasCurso = recuperarLecturas();
+
+    function escaparHTML(valor) {
+      return String(valor ?? "").replace(
+        /[&<>"']/g,
+        caracter => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[caracter]
+      );
+    }
+
+    function recuperarLecturas() {
+      try {
+        const datos = JSON.parse(
+          sessionStorage.getItem(
+            CONFIG_CURSO.claveLecturas
+          ) || "[]"
+        );
+
+        return modulos.map(
+          (_, indice) =>
+            Array.isArray(datos) &&
+            datos[indice] === true
+        );
+      } catch (error) {
+        return modulos.map(() => false);
+      }
+    }
+
+    function guardarLecturas() {
+      try {
+        sessionStorage.setItem(
+          CONFIG_CURSO.claveLecturas,
+          JSON.stringify(lecturasCurso)
+        );
+      } catch (error) {
+        // La navegación funciona sin almacenamiento.
+      }
+    }
+
+    function entregaDeModulo(codigo) {
+      if (
+        !estadoCurso ||
+        !Array.isArray(estadoCurso.entregas)
+      ) {
+        return null;
+      }
+
+      return estadoCurso.entregas.find(
+        entrega => entrega.modulo === codigo
+      ) || null;
+    }
+
+    function accesoListo() {
+      return Boolean(
+        CONFIG_CURSO.servicio &&
+        usuarioCurso &&
+        estadoCurso &&
+        !envioEnProceso &&
+        !consultaEnProceso
+      );
+    }
+
+    function actualizarProgreso() {
+      const leidas = lecturasCurso.filter(Boolean).length;
+
+      document.getElementById(
+        "lecturasEstado"
+      ).textContent =
+        "Lecturas marcadas: " +
+        leidas +
+        " de " +
+        modulos.length;
+
+      document.getElementById(
+        "barraLecturas"
+      ).max = modulos.length;
+
+      document.getElementById(
+        "barraLecturas"
+      ).value = leidas;
+
+      const entregadas = CONFIG_CURSO.modulosEvaluables
+        .filter(codigo => entregaDeModulo(codigo))
+        .length;
+
+      const textoEntregas = document.getElementById(
+        "entregasEstado"
+      );
+
+      if (!usuarioCurso) {
+        textoEntregas.textContent =
+          "Actividades registradas: verifica tu correo";
+      } else if (!estadoCurso) {
+        textoEntregas.textContent =
+          "Actividades registradas: consulta pendiente";
+      } else {
+        textoEntregas.textContent =
+          "Actividades registradas: " +
+          entregadas +
+          " de " +
+          CONFIG_CURSO.modulosEvaluables.length;
+      }
+
+      document.getElementById(
+        "barraEntregas"
+      ).max = CONFIG_CURSO.modulosEvaluables.length;
+
+      document.getElementById(
+        "barraEntregas"
+      ).value = entregadas;
+
+      document.getElementById(
+        "consultarResultados"
+      ).disabled =
+        !usuarioCurso ||
+        !CONFIG_CURSO.servicio ||
+        envioEnProceso ||
+        consultaEnProceso;
+    }
+
+    function pintarNavegacion() {
+      const navegacion = document.getElementById(
+        "navegacionModulos"
+      );
+
+      navegacion.replaceChildren();
+
+      modulos.forEach((modulo, indice) => {
+        const boton = document.createElement("button");
+
+        boton.type = "button";
+        boton.textContent = modulo.codigo;
+        boton.title = modulo.titulo;
+        boton.disabled = envioEnProceso || consultaEnProceso;
+
+        if (indice === moduloActual) {
+          boton.setAttribute("aria-current", "step");
+        }
+
+        boton.addEventListener("click", () => {
+          mostrarModulo(indice, true);
+        });
+
+        navegacion.appendChild(boton);
+      });
+    }
+
+    function guardarBorradorVisible() {
+      const modulo = modulos[moduloActual];
+      const formulario = document.getElementById(
+        "actividad"
+      );
+
+      if (
+        !modulo ||
+        !formulario ||
+        entregaDeModulo(modulo.codigo)
+      ) {
+        return;
+      }
+
+      const respuestas = modulo.preguntas.map(
+        (_, numero) => {
+          const seleccionado = formulario.querySelector(
+            'input[name="q' + numero + '"]:checked'
+          );
+
+          return seleccionado
+            ? Number(seleccionado.value)
+            : null;
+        }
+      );
+
+      borradoresCurso.set(
+        modulo.codigo,
+        respuestas
+      );
+    }
+
+    function crearActividadHTML(modulo) {
+      if (!modulo.preguntas.length) {
+        return `
+          <div class="aviso">
+            <p>
+              Este módulo es introductorio.
+              No tiene actividad de evaluación
+              y no aporta puntos a la calificación.
+            </p>
+          </div>
+        `;
+      }
+
+      const entrega = entregaDeModulo(modulo.codigo);
+      const bloqueada = Boolean(entrega) || !accesoListo();
+
+      const respuestas = entrega
+        ? entrega.respuestas
+        : borradoresCurso.get(modulo.codigo) || [];
+
+      let textoBoton;
+
+      if (entrega) {
+        textoBoton = "Actividad ya entregada";
+      } else if (!CONFIG_CURSO.servicio) {
+        textoBoton = "Evaluación pendiente de configuración";
+      } else if (!usuarioCurso) {
+        textoBoton = "Verifica tu correo para entregar";
+      } else if (!accesoListo()) {
+        textoBoton = "Espera la comprobación del registro";
+      } else {
+        textoBoton = "Entregar definitivamente";
+      }
+
+      return `
+        <section aria-labelledby="tituloActividad">
+          <h3 id="tituloActividad">
+            Actividad de ${escaparHTML(modulo.codigo)}
+          </h3>
+
+          <p>
+            Contesta todas las preguntas.
+            Puedes cambiar tus opciones antes
+            de confirmar la entrega.
+          </p>
+
+          <div class="aviso">
+            <p>
+              Solo se permite una entrega definitiva
+              por módulo. Después de que el servicio
+              confirme el registro, la actividad
+              quedará bloqueada.
+            </p>
+          </div>
+
+          <form id="actividad" novalidate>
+            ${
+              modulo.preguntas.map(
+                (pregunta, numero) => `
+                  <fieldset>
+                    <legend>
+                      ${numero + 1}.
+                      ${escaparHTML(pregunta.texto)}
+                    </legend>
+
+                    ${
+                      pregunta.opciones.map(
+                        (opcion, valor) => `
+                          <label class="opcion">
+                            <input
+                              type="radio"
+                              name="q${numero}"
+                              value="${valor}"
+                              ${
+                                respuestas[numero] === valor
+                                  ? "checked"
+                                  : ""
+                              }
+                              ${bloqueada ? "disabled" : ""}
+                            >
+
+                            <span>
+                              ${escaparHTML(opcion)}
+                            </span>
+                          </label>
+                        `
+                      ).join("")
+                    }
+                  </fieldset>
+                `
+              ).join("")
+            }
+
+            <p
+              id="errorActividad"
+              class="error"
+              role="alert"
+            ></p>
+
+            <div
+              id="notaActividad"
+              role="status"
+              ${entrega ? 'class="entrega-confirmada"' : ""}
+            >
+              ${
+                entrega
+                  ? `
+                    Entrega guardada.
+                    Resultado:
+                    ${escaparHTML(entrega.aciertos)}
+                    de
+                    ${escaparHTML(entrega.total)}
+                    respuestas correctas.
+                    Calificación:
+                    ${escaparHTML(entrega.calificacion)}/100.
+                    No se permite otra entrega.
+                  `
+                  : ""
+              }
+            </div>
+
+            <div class="acciones">
+              <button
+                id="entregarActividad"
+                type="submit"
+                ${bloqueada ? "disabled" : ""}
+              >
+                ${escaparHTML(textoBoton)}
+              </button>
+            </div>
+          </form>
+        </section>
+      `;
+    }
+
+    function mostrarModulo(indice, desplazar = false) {
+      if (
+        !Number.isInteger(indice) ||
+        indice < 0 ||
+        indice >= modulos.length
+      ) {
+        return;
+      }
+
+      if (
+        (envioEnProceso || consultaEnProceso) &&
+        indice !== moduloActual
+      ) {
+        return;
+      }
+
+      guardarBorradorVisible();
+      moduloActual = indice;
+
+      const modulo = modulos[indice];
+      const contenedor = document.getElementById(
+        "contenidoModulo"
+      );
+
+      contenedor.innerHTML = `
+        <p class="etiqueta">
+          ${escaparHTML(modulo.codigo)}
+        </p>
+
+        <h2
+          id="tituloModulo"
+          tabindex="-1"
+        >
+          ${escaparHTML(modulo.titulo)}
+        </h2>
+
+        <p>
+          ${escaparHTML(modulo.objetivo)}
+        </p>
+
+        <div class="tarjetas">
+          ${
+            modulo.tarjetas.map(
+              tarjeta => `
+                <article class="tarjeta">
+                  <h3>${escaparHTML(tarjeta.titulo)}</h3>
+                  <p>${escaparHTML(tarjeta.texto)}</p>
+                </article>
+              `
+            ).join("")
+          }
+        </div>
+
+        <div class="lecciones">
+          ${
+            modulo.lecciones.map(
+              leccion => `
+                <section class="leccion-ampliada">
+                  <h3>${escaparHTML(leccion.titulo)}</h3>
+                  ${leccion.contenido}
+                </section>
+              `
+            ).join("")
+          }
+        </div>
+
+        ${
+          modulo.caso
+            ? `
+              <section class="caso">
+                <h3>
+                  ${escaparHTML(modulo.caso.titulo)}
+                </h3>
+                ${modulo.caso.contenido}
+              </section>
+            `
+            : ""
+        }
+
+        <details>
+          <summary>Fuente bibliográfica y control técnico</summary>
+          <p>${escaparHTML(modulo.fuente)}</p>
+        </details>
+
+        <div class="acciones">
+          <button
+            id="marcarLectura"
+            type="button"
+            aria-pressed="${lecturasCurso[indice]}"
+          >
+            ${
+              lecturasCurso[indice]
+                ? "Lectura marcada: quitar marca"
+                : "Marcar lectura como completada"
+            }
+          </button>
+        </div>
+
+        ${crearActividadHTML(modulo)}
+
+        <div
+          class="acciones"
+          aria-label="Navegación entre módulos"
+        >
+          <button
+            id="moduloAnterior"
+            type="button"
+            ${
+              indice === 0 ||
+              envioEnProceso ||
+              consultaEnProceso
+                ? "disabled"
+                : ""
+            }
+          >
+            Módulo anterior
+          </button>
+
+          <button
+            id="moduloSiguiente"
+            type="button"
+            ${
+              indice === modulos.length - 1 ||
+              envioEnProceso ||
+              consultaEnProceso
+                ? "disabled"
+                : ""
+            }
+          >
+            Siguiente módulo
+          </button>
+        </div>
+      `;
+
+      document.getElementById(
+        "marcarLectura"
+      ).addEventListener("click", evento => {
+        lecturasCurso[indice] = !lecturasCurso[indice];
+
+        guardarLecturas();
+        actualizarProgreso();
+
+        evento.currentTarget.setAttribute(
+          "aria-pressed",
+          String(lecturasCurso[indice])
+        );
+
+        evento.currentTarget.textContent =
+          lecturasCurso[indice]
+            ? "Lectura marcada: quitar marca"
+            : "Marcar lectura como completada";
+      });
+
+      document.getElementById(
+        "moduloAnterior"
+      ).addEventListener("click", () => {
+        mostrarModulo(indice - 1, true);
+      });
+
+      document.getElementById(
+        "moduloSiguiente"
+      ).addEventListener("click", () => {
+        mostrarModulo(indice + 1, true);
+      });
+
+      const formulario = document.getElementById(
+        "actividad"
+      );
+
+      if (formulario) {
+        formulario.addEventListener(
+          "change",
+          guardarBorradorVisible
+        );
+
+        formulario.addEventListener("submit", evento => {
+          evento.preventDefault();
+          entregarActividad(indice);
+        });
+      }
+
+      pintarNavegacion();
+      actualizarProgreso();
+
+      if (desplazar) {
+        const titulo = document.getElementById(
+          "tituloModulo"
+        );
+
+        titulo.focus({ preventScroll: true });
+
+        contenedor.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+
+    function pintarResultados() {
+      const salida = document.getElementById(
+        "resultado"
+      );
+
+      salida.replaceChildren();
+
+      if (!CONFIG_CURSO.servicio) {
+        salida.textContent =
+          "El servicio de evaluación todavía no está configurado.";
+        return;
+      }
+
+      if (!usuarioCurso) {
+        salida.textContent =
+          "Verifica tu correo para consultar tus resultados.";
+        return;
+      }
+
+      if (!estadoCurso) {
+        salida.textContent =
+          "Consulta el registro para recuperar tus entregas.";
+        return;
+      }
+
+      const lista = document.createElement("ul");
+
+      CONFIG_CURSO.modulosEvaluables.forEach(codigo => {
+        const entrega = entregaDeModulo(codigo);
+        const elemento = document.createElement("li");
+
+        elemento.textContent = entrega
+          ? codigo +
+            ": " +
+            entrega.aciertos +
+            " de " +
+            entrega.total +
+            " — " +
+            entrega.calificacion +
+            "/100."
+          : codigo + ": pendiente de entrega.";
+
+        lista.appendChild(elemento);
+      });
+
+      salida.appendChild(lista);
+
+      const resumen = document.createElement("p");
+
+      if (estadoCurso.final) {
+        resumen.textContent =
+          "Calificación final guardada: " +
+          estadoCurso.final.calificacion +
+          "/100. Estado del correo: " +
+          estadoCurso.final.estadoCorreo +
+          ".";
+      } else {
+        const registradas =
+          CONFIG_CURSO.modulosEvaluables.filter(
+            codigo => entregaDeModulo(codigo)
+          ).length;
+
+        resumen.textContent =
+          "Actividades registradas: " +
+          registradas +
+          " de " +
+          CONFIG_CURSO.modulosEvaluables.length +
+          ". La calificación final se genera cuando " +
+          "las tres actividades quedan registradas.";
+      }
+
+      salida.appendChild(resumen);
+    }
+
+    // FIN DEL BLOQUE DE NAVEGACIÓN Y ACTIVIDADES.
+    // EL SIGUIENTE BLOQUE AGREGA EL ACCESO Y LA COMUNICACIÓN.
+          function mensajeAcceso(texto) {
+      document.getElementById(
+        "mensajeAcceso"
+      ).textContent = texto;
+    }
+
+    function guardarSesion() {
+      try {
+        if (usuarioCurso) {
+          sessionStorage.setItem(
+            CONFIG_CURSO.claveSesion,
+            JSON.stringify(usuarioCurso)
+          );
+        } else {
+          sessionStorage.removeItem(
+            CONFIG_CURSO.claveSesion
+          );
+        }
+      } catch (error) {
+        // Si no hay almacenamiento, se verificará de nuevo.
+      }
+    }
+
+    function recuperarSesion() {
+      try {
+        const datos = JSON.parse(
+          sessionStorage.getItem(
+            CONFIG_CURSO.claveSesion
+          ) || "null"
+        );
+
+        if (
+          datos &&
+          typeof datos.correo === "string" &&
+          typeof datos.sesion === "string" &&
+          datos.sesion.length >= 30
+        ) {
+          return {
+            correo: datos.correo,
+            nombre: String(datos.nombre || ""),
+            sesion: datos.sesion
+          };
+        }
+      } catch (error) {
+        return null;
+      }
+
+      return null;
+    }
+
+    function datosSesion() {
+      if (!usuarioCurso) {
+        throw new Error(
+          "Verifica tu correo antes de continuar."
+        );
+      }
+
+      return {
+        correo: usuarioCurso.correo,
+        sesion: usuarioCurso.sesion,
+        curso: CONFIG_CURSO.codigo,
+        version: CONFIG_CURSO.version
+      };
+    }
+
+    function origenServicioValido(origen) {
+      try {
+        const url = new URL(origen);
+
+        return (
+          url.protocol === "https:" &&
+          (
+            url.hostname === "script.google.com" ||
+            url.hostname === "script.googleusercontent.com" ||
+            url.hostname.endsWith(
+              "-script.googleusercontent.com"
+            )
+          )
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function llamarServicio(accion, datos = {}) {
+      return new Promise((resolver, rechazar) => {
+        if (!CONFIG_CURSO.servicio) {
+          rechazar(
+            new Error(
+              "El servicio de IVA-A-04 aún no está configurado."
+            )
+          );
+          return;
+        }
+
+        if (
+          !window.crypto ||
+          typeof window.crypto.getRandomValues !== "function"
+        ) {
+          rechazar(
+            new Error(
+              "Abre el curso desde su dirección HTTPS publicada."
+            )
+          );
+          return;
+        }
+
+        const bytes = new Uint8Array(24);
+        window.crypto.getRandomValues(bytes);
+
+        const id = "iva4_" + Array.from(
+          bytes,
+          numero => numero.toString(16).padStart(2, "0")
+        ).join("");
+
+        const marco = document.createElement("iframe");
+        marco.name = id;
+        marco.hidden = true;
+        marco.title = "Comunicación con el registro de IVA-A-04";
+
+        const formulario = document.createElement("form");
+        formulario.method = "POST";
+        formulario.action = CONFIG_CURSO.servicio;
+        formulario.target = id;
+        formulario.hidden = true;
+
+        const campo = document.createElement("input");
+        campo.type = "hidden";
+        campo.name = "solicitud";
+        campo.value = JSON.stringify({
+          ...datos,
+          curso: CONFIG_CURSO.codigo,
+          version: CONFIG_CURSO.version,
+          id,
+          accion
+        });
+
+        formulario.appendChild(campo);
+
+        let terminado = false;
+        let temporizador;
+
+        function limpiar() {
+          clearTimeout(temporizador);
+          window.removeEventListener(
+            "message",
+            recibirRespuesta
+          );
+          formulario.remove();
+          marco.remove();
+        }
+
+        function recibirRespuesta(evento) {
+          if (
+            terminado ||
+            !origenServicioValido(evento.origin)
+          ) {
+            return;
+          }
+
+          const respuesta = evento.data;
+
+          if (
+            !respuesta ||
+            typeof respuesta !== "object" ||
+            respuesta.tipo !== CONFIG_CURSO.tipoRespuesta ||
+            respuesta.id !== id ||
+            typeof respuesta.ok !== "boolean"
+          ) {
+            return;
+          }
+
+          terminado = true;
+          limpiar();
+
+          if (respuesta.ok) {
+            resolver(respuesta.datos);
+          } else {
+            rechazar(
+              new Error(
+                String(
+                  respuesta.error ||
+                  "No se pudo completar la solicitud."
+                )
+              )
+            );
+          }
+        }
+
+        window.addEventListener(
+          "message",
+          recibirRespuesta
+        );
+
+        temporizador = setTimeout(() => {
+          if (terminado) {
+            return;
+          }
+
+          terminado = true;
+          limpiar();
+
+          rechazar(
+            new Error(
+              "No llegó la confirmación del servicio. " +
+              "Si estabas entregando, consulta " +
+              "Actualizar mis entregas antes de intentar de nuevo."
+            )
+          );
+        }, 65000);
+
+        try {
+          document.body.append(marco, formulario);
+          formulario.submit();
+        } catch (error) {
+          terminado = true;
+          limpiar();
+
+          rechazar(
+            new Error(
+              "No se pudo iniciar la comunicación con el registro."
+            )
+          );
+        }
+      });
+    }
+
+    function validarEstado(datos) {
+      if (
+        !datos ||
+        datos.curso !== CONFIG_CURSO.codigo ||
+        datos.version !== CONFIG_CURSO.version ||
+        !Array.isArray(datos.entregas)
+      ) {
+        throw new Error(
+          "El registro recibido no corresponde a esta versión del curso."
+        );
+      }
+
+      const vistos = new Set();
+
+      const entregas = datos.entregas.map(entrega => {
+        const modulo = modulos.find(
+          elemento => elemento.codigo === entrega.modulo
+        );
+
+        if (
+          !modulo ||
+          !CONFIG_CURSO.modulosEvaluables.includes(
+            entrega.modulo
+          ) ||
+          vistos.has(entrega.modulo) ||
+          !Array.isArray(entrega.respuestas) ||
+          entrega.respuestas.length !== modulo.preguntas.length ||
+          !entrega.respuestas.every(
+            (respuesta, numero) =>
+              Number.isInteger(respuesta) &&
+              respuesta >= 0 &&
+              respuesta < modulo.preguntas[numero].opciones.length
+          ) ||
+          entrega.total !== modulo.preguntas.length ||
+          !Number.isInteger(entrega.aciertos) ||
+          entrega.aciertos < 0 ||
+          entrega.aciertos > entrega.total ||
+          !Number.isFinite(entrega.calificacion) ||
+          entrega.calificacion < 0 ||
+          entrega.calificacion > 100
+        ) {
+          throw new Error(
+            "El servicio devolvió una entrega con datos no válidos."
+          );
+        }
+
+        vistos.add(entrega.modulo);
+
+        return {
+          modulo: entrega.modulo,
+          respuestas: [...entrega.respuestas],
+          total: entrega.total,
+          aciertos: entrega.aciertos,
+          calificacion: entrega.calificacion
+        };
+      });
+
+      let final = null;
+
+      if (datos.final != null) {
+        if (
+          vistos.size !== CONFIG_CURSO.modulosEvaluables.length ||
+          !Number.isFinite(datos.final.calificacion) ||
+          datos.final.calificacion < 0 ||
+          datos.final.calificacion > 100 ||
+          typeof datos.final.estadoCorreo !== "string"
+        ) {
+          throw new Error(
+            "El servicio devolvió un resultado final no válido."
+          );
+        }
+
+        final = {
+          calificacion: datos.final.calificacion,
+          estadoCorreo: datos.final.estadoCorreo
+        };
+      }
+
+      return {
+        curso: CONFIG_CURSO.codigo,
+        version: CONFIG_CURSO.version,
+        entregas,
+        final
+      };
+    }
+
+    function refrescarCurso() {
+      pintarAcceso();
+      mostrarModulo(moduloActual);
+      pintarResultados();
+    }
+
+    function pintarAcceso() {
+      const contenedor = document.getElementById(
+        "contenidoAcceso"
+      );
+
+      if (!CONFIG_CURSO.servicio) {
+        contenedor.innerHTML = `
+          <div class="aviso">
+            <p>
+              El contenido puede consultarse.
+              El acceso por correo y las entregas
+              se habilitarán cuando termine
+              la configuración del registro de IVA-A-04.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      if (!usuarioCurso) {
+        if (contenedor.querySelector("#solicitarCodigo")) {
+          return;
+        }
+
+        contenedor.innerHTML = `
+          <form id="solicitarCodigo">
+            <label for="correoAcceso">Correo autorizado</label>
+
+            <input
+              id="correoAcceso"
+              class="acceso-campo"
+              type="email"
+              autocomplete="email"
+              maxlength="254"
+              required
+            >
+
+            <button id="botonCodigo" type="submit">
+              Enviar código a mi correo
+            </button>
+          </form>
+
+          <form id="verificarCodigo" hidden>
+            <p>
+              Revisa tu correo y utiliza únicamente
+              el código más reciente.
+            </p>
+
+            <label for="codigoAcceso">Código de acceso</label>
+
+            <input
+              id="codigoAcceso"
+              class="acceso-campo"
+              type="text"
+              autocomplete="one-time-code"
+              maxlength="30"
+              required
+            >
+
+            <button id="botonVerificar" type="submit">
+              Verificar e ingresar
+            </button>
+          </form>
+        `;
+
+        document.getElementById(
+          "solicitarCodigo"
+        ).addEventListener("submit", solicitarCodigo);
+
+        document.getElementById(
+          "verificarCodigo"
+        ).addEventListener("submit", verificarCodigo);
+
+        return;
+      }
+
+      contenedor.innerHTML = `
+        <p>
+          Sesión de
+          ${escaparHTML(usuarioCurso.nombre || usuarioCurso.correo)}
+        </p>
+
+        <div class="acciones">
+          <button
+            id="actualizarEntregas"
+            type="button"
+            ${
+              envioEnProceso || consultaEnProceso
+                ? "disabled"
+                : ""
+            }
+          >
+            Actualizar mis entregas
+          </button>
+
+          <button
+            id="cerrarSesion"
+            type="button"
+            ${
+              envioEnProceso || consultaEnProceso
+                ? "disabled"
+                : ""
+            }
+          >
+            Cerrar sesión
+          </button>
+        </div>
+      `;
+
+      document.getElementById(
+        "actualizarEntregas"
+      ).addEventListener("click", sincronizarEntregas);
+
+      document.getElementById(
+        "cerrarSesion"
+      ).addEventListener("click", cerrarSesion);
+    }
+
+    async function solicitarCodigo(evento) {
+      evento.preventDefault();
+
+      const boton = document.getElementById("botonCodigo");
+      const correo = document.getElementById("correoAcceso");
+
+      boton.disabled = true;
+      correo.readOnly = true;
+
+      document.getElementById(
+        "verificarCodigo"
+      ).hidden = true;
+
+      document.getElementById("codigoAcceso").value = "";
+
+      mensajeAcceso("Solicitando código. Espera un momento...");
+
+      try {
+        const respuesta = await llamarServicio(
+          "solicitarCodigo",
+          {
+            correo: correo.value.trim().toLowerCase()
+          }
+        );
+
+        document.getElementById(
+          "verificarCodigo"
+        ).hidden = false;
+
+        mensajeAcceso(
+          String(respuesta?.mensaje || "Solicitud procesada.") +
+          " Revisa también spam. " +
+          "No solicites varios códigos seguidos."
+        );
+      } catch (error) {
+        mensajeAcceso(error.message);
+      } finally {
+        boton.disabled = false;
+        correo.readOnly = false;
+      }
+    }
+
+    async function verificarCodigo(evento) {
+      evento.preventDefault();
+
+      const boton = document.getElementById(
+        "botonVerificar"
+      );
+
+      const botonCodigo = document.getElementById(
+        "botonCodigo"
+      );
+
+      const correo = document.getElementById(
+        "correoAcceso"
+      );
+
+      boton.disabled = true;
+      botonCodigo.disabled = true;
+      correo.readOnly = true;
+
+      mensajeAcceso("Verificando acceso...");
+
+      try {
+        const respuesta = await llamarServicio(
+          "verificarCodigo",
+          {
+            correo: correo.value.trim().toLowerCase(),
+            codigo: document.getElementById(
+              "codigoAcceso"
+            ).value.trim()
+          }
+        );
+
+        if (
+          !respuesta ||
+          typeof respuesta.correo !== "string" ||
+          typeof respuesta.sesion !== "string" ||
+          respuesta.sesion.length < 30
+        ) {
+          throw new Error(
+            "El servicio no devolvió una sesión válida."
+          );
+        }
+
+        const estadoValidado = validarEstado(
+          respuesta.estado
+        );
+
+        usuarioCurso = {
+          correo: respuesta.correo,
+          nombre: String(respuesta.nombre || ""),
+          sesion: respuesta.sesion
+        };
+
+        estadoCurso = estadoValidado;
+        borradoresCurso.clear();
+        guardarSesion();
+        refrescarCurso();
+
+        mensajeAcceso(
+          "Correo verificado. Se recuperaron las entregas registradas."
+        );
+      } catch (error) {
+        mensajeAcceso(error.message);
+      } finally {
+        if (boton.isConnected) {
+          boton.disabled = false;
+          botonCodigo.disabled = false;
+          correo.readOnly = false;
+        }
+      }
+    }
+
+    async function sincronizarEntregas() {
+      if (
+        !usuarioCurso ||
+        envioEnProceso ||
+        consultaEnProceso
+      ) {
+        return;
+      }
+
+      guardarBorradorVisible();
+      consultaEnProceso = true;
+      estadoCurso = null;
+      refrescarCurso();
+
+      mensajeAcceso("Consultando entregas guardadas...");
+
+      try {
+        const respuesta = await llamarServicio(
+          "consultar",
+          datosSesion()
+        );
+
+        estadoCurso = validarEstado(respuesta);
+
+        mensajeAcceso(
+          "Entregas actualizadas desde el registro de IVA-A-04."
+        );
+      } catch (error) {
+        estadoCurso = null;
+
+        mensajeAcceso(
+          error.message +
+          " Si la sesión venció, ciérrala y verifica tu correo de nuevo."
+        );
+      } finally {
+        consultaEnProceso = false;
+        refrescarCurso();
+      }
+    }
+
+    async function entregarActividad(indice) {
+      if (
+        indice !== moduloActual ||
+        !accesoListo()
+      ) {
+        return;
+      }
+
+      const modulo = modulos[indice];
+
+      if (
+        !modulo.preguntas.length ||
+        entregaDeModulo(modulo.codigo)
+      ) {
+        return;
+      }
+
+      guardarBorradorVisible();
+
+      const respuestas = [
+        ...(borradoresCurso.get(modulo.codigo) || [])
+      ];
+
+      const faltantes = modulo.preguntas
+        .map((_, numero) => numero)
+        .filter(numero => {
+          const valor = respuestas[numero];
+
+          return (
+            !Number.isInteger(valor) ||
+            valor < 0 ||
+            valor >= modulo.preguntas[numero].opciones.length
+          );
+        });
+
+      const errorVisible = document.getElementById(
+        "errorActividad"
+      );
+
+      if (faltantes.length) {
+        errorVisible.textContent =
+          "Faltan las preguntas: " +
+          faltantes.map(numero => numero + 1).join(", ") +
+          ".";
+
+        document.querySelector(
+          '#actividad input[name="q' + faltantes[0] + '"]'
+        )?.focus();
+
+        return;
+      }
+
+      const confirmada = window.confirm(
+        "Vas a entregar " +
+        modulo.codigo +
+        ". No podrás modificar ni repetir esta actividad. " +
+        "¿Confirmas la entrega?"
+      );
+
+      if (!confirmada) {
+        return;
+      }
+
+      envioEnProceso = true;
+      refrescarCurso();
+
+      const boton = document.getElementById(
+        "entregarActividad"
+      );
+
+      if (boton) {
+        boton.textContent = "Guardando entrega...";
+      }
+
+      mensajeAcceso(
+        "Guardando entrega. Mantén abierta esta página."
+      );
+
+      try {
+        const respuesta = await llamarServicio(
+          "entregar",
+          {
+            ...datosSesion(),
+            modulo: modulo.codigo,
+            respuestas
+          }
+        );
+
+        const nuevoEstado = validarEstado(respuesta);
+
+        if (
+          !nuevoEstado.entregas.some(
+            entrega => entrega.modulo === modulo.codigo
+          )
+        ) {
+          throw new Error(
+            "La respuesta no confirmó la entrega del módulo."
+          );
+        }
+
+        estadoCurso = nuevoEstado;
+        borradoresCurso.delete(modulo.codigo);
+
+        mensajeAcceso(
+          "La entrega fue confirmada por el registro."
+        );
+      } catch (error) {
+        estadoCurso = null;
+
+        mensajeAcceso(
+          error.message +
+          " Pulsa Actualizar mis entregas para comprobar " +
+          "si quedó registrada antes de volver a intentar."
+        );
+      } finally {
+        envioEnProceso = false;
+        refrescarCurso();
+      }
+    }
+
+    function cerrarSesion() {
+      if (envioEnProceso || consultaEnProceso) {
+        return;
+      }
+
+      guardarBorradorVisible();
+
+      usuarioCurso = null;
+      estadoCurso = null;
+      borradoresCurso.clear();
+
+      /*
+       * Retira las opciones de la cuenta anterior
+       * antes de volver a dibujar las actividades.
+       */
+      document.getElementById(
+        "contenidoModulo"
+      ).replaceChildren();
+
+      guardarSesion();
+      refrescarCurso();
+
+      mensajeAcceso(
+        "Sesión cerrada en este navegador. " +
+        "Las entregas registradas no se borraron."
+      );
+    }
+
+    /*
+     * INICIO DEL CURSO
+     */
+    document.getElementById(
+      "consultarResultados"
+    ).addEventListener("click", async () => {
+      await sincronizarEntregas();
+    });
+
+    window.addEventListener("beforeunload", evento => {
+      if (!envioEnProceso) {
+        return;
+      }
+
+      evento.preventDefault();
+      evento.returnValue = "";
+    });
+
+    usuarioCurso = CONFIG_CURSO.servicio
+      ? recuperarSesion()
+      : null;
+
+    pintarAcceso();
+    mostrarModulo(0);
+    pintarResultados();
+
+    if (usuarioCurso) {
+      sincronizarEntregas();
+    }
+  </script>
+</body>
+</html>
